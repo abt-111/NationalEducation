@@ -10,5 +10,7 @@
             _id = id;
             _name = name;
         }
+
+        public string GetName() => _name;
     }
 }

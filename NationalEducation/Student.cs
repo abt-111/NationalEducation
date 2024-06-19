@@ -14,6 +14,25 @@
             _lastName = lastName;
             _firstName = firstName;
             _dateOfBirth = dateOfBirth;
+            _grades = new List<Grade>();
+        }
+
+        public uint GetID() => _id;
+        public string GetLastName() => _lastName;
+        public string GetFirstName() => _firstName;
+        public string GetDateOfBirth()
+        {
+            return _dateOfBirth.ToString("MM/dd/yyyy");
+        }
+
+        public List<Grade> GetGrades()
+        {
+            return _grades;
+        }
+
+        public void AddGrade(Grade grade)
+        {
+            _grades.Add(grade);
         }
     }
 }
