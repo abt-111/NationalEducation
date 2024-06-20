@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace NationalEducation
+﻿namespace NationalEducation
 {
     internal class Grade
     {
