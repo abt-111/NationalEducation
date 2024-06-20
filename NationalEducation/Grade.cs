@@ -4,18 +4,24 @@ namespace NationalEducation
 {
     internal class Grade
     {
-        private Course _course;
+        private readonly uint _courseId;
         private float _value;
         private string _observation;
 
-        public Grade(Course course, float value, string observation)
+        public Grade(uint courseId, float value)
         {
-            _course = course;
+            _courseId = courseId;
+            _value = value;
+            _observation = "";
+        }
+        public Grade(uint courseId, float value, string observation)
+        {
+            _courseId = courseId;
             _value = value;
             _observation = observation;
         }
 
-        public Course GetCourse() => _course;
+        public uint GetCourseId() => _courseId;
 
         public float GetValue() => _value;
 

@@ -2,7 +2,7 @@
 {
     internal class Student
     {
-        private uint _id;
+        private readonly uint _id;
         private string _lastName;
         private string _firstName;
         private DateTime _dateOfBirth;
@@ -17,12 +17,12 @@
             _grades = new List<Grade>();
         }
 
-        public uint GetID() => _id;
+        public uint GetId() => _id;
         public string GetLastName() => _lastName;
         public string GetFirstName() => _firstName;
         public string GetDateOfBirth()
         {
-            return _dateOfBirth.ToString("MM/dd/yyyy");
+            return _dateOfBirth.ToString("dd/MM/yyyy");
         }
 
         public List<Grade> GetGrades()
