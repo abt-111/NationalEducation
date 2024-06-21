@@ -92,6 +92,7 @@
         public void DisplayStudent(int index)
         {
             Student student = _students[index];
+            List<Grade> gradesOfStudent = GetGradesOfStudent(student);
 
             // Prototype d'affichage
             Console.WriteLine("----------------------------------------------------------------------");
@@ -101,14 +102,14 @@
             Console.WriteLine($"Date de naissance : {student.GetDateOfBirth()}\n");
             Console.WriteLine("Résultats scolaires :\n");
             float meanOfGrades = 0.0f;
-            foreach (Grade grade in GetGradesofStudent(student))
+            foreach (Grade grade in gradesOfStudent)
             {
                 Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.GetCourseId())}");
                 Console.WriteLine($"        Note : {grade.GetValue()}");
                 Console.WriteLine($"        Appréciation : {grade.GetObservation()}\n");
                 meanOfGrades += grade.GetValue();
             }
-            Console.WriteLine($"   Moyenne : {meanOfGrades / student.GetGrades().Count}");
+            Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
             Console.WriteLine("----------------------------------------------------------------------");
         }
 
@@ -147,7 +148,7 @@
         }
 
         // Retrouver un étudiant à partir de son identifiant uniquement
-        public List<Grade> GetGradesofStudent(Student student)
+        public List<Grade> GetGradesOfStudent(Student student)
         {
             List<Grade> studentGrades = new List<Grade>();
 
