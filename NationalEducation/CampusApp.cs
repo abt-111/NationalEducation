@@ -6,13 +6,15 @@
         private uint _coursesId = 0;
         private List<Student> _students = new List<Student>();
         private List<Course> _courses = new List<Course>();
+        private List<Grade> _grades = new List<Grade>();
 
-        public CampusApp(uint studentId, uint courseId, List<Student> students, List<Course> courses)
+        public CampusApp(uint studentId, uint courseId, List<Student> students, List<Course> courses, List<Grade> grades)
         {
             _studentsId = studentId;
             _coursesId = courseId;
             _students = students;
             _courses = courses;
+            _grades = grades;
         }
 
         public uint StudentsId
@@ -89,7 +91,7 @@
         // Consulter un élève existant
         public void DisplayStudent(int index)
         {
-            Student student = Students[index];
+            Student student = _students[index];
 
             // Prototype d'affichage
             Console.WriteLine("----------------------------------------------------------------------");
@@ -99,7 +101,7 @@
             Console.WriteLine($"Date de naissance : {student.GetDateOfBirth()}\n");
             Console.WriteLine("Résultats scolaires :\n");
             float meanOfGrades = 0.0f;
-            foreach (Grade grade in student.GetGrades())
+            foreach (Grade grade in GetGradesofStudent(student))
             {
                 Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.GetCourseId())}");
                 Console.WriteLine($"        Note : {grade.GetValue()}");
@@ -128,7 +130,7 @@
             gradeValue = Single.Parse(Console.ReadLine());
             Console.Write("Entrez une appréciation : ");
             observation = Console.ReadLine();
-            student.AddGrade(new Grade(courseId, student.GetId(), gradeValue, observation));
+            _grades.Add(new Grade(courseId, student.GetId(), gradeValue, observation));
         }
 
         // Retrouver un étudiant à partir de son identifiant uniquement
@@ -142,6 +144,22 @@
                 }
             }
             return _students[1];
+        }
+
+        // Retrouver un étudiant à partir de son identifiant uniquement
+        public List<Grade> GetGradesofStudent(Student student)
+        {
+            List<Grade> studentGrades = new List<Grade>();
+
+            foreach (Grade grade in _grades)
+            {
+                if(grade.GetStudentId() == student.GetId())
+                {
+                    studentGrades.Add(grade);
+                }
+            }
+
+            return studentGrades;
         }
 
         // Le menu Cours permettra de son côté de :

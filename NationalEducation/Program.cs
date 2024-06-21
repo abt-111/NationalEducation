@@ -5,7 +5,7 @@
         private static void Main(string[] args)
         {
             string userInput;
-            CampusApp campusApp = new CampusApp(0, 0, new List<Student>(), new List<Course>());
+            CampusApp campusApp = new CampusApp(0, 0, new List<Student>(), new List<Course>(), new List<Grade>());
 
             // Menu
             // Au lancement de l'application, un menu permettra à l'utilisateur de choisir entre ces entrées :

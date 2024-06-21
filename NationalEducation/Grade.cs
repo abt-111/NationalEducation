@@ -17,6 +17,8 @@
 
         public uint GetCourseId() => _courseId;
 
+        public uint GetStudentId() => _studentId;
+
         public float GetValue() => _value;
 
         public string GetObservation() => _observation;

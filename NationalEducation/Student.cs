@@ -6,7 +6,7 @@
         private string _lastName;
         private string _firstName;
         private DateTime _dateOfBirth;
-        private List<Grade> _grades;
+        // private List<Grade> _grades;
 
         public Student(uint id, string lastName, string firstName, DateTime dateOfBirth)
         {
