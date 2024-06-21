@@ -50,9 +50,19 @@
         // Lister les étudiants
         public void ListAllStudents()
         {
-            foreach (Student student in _students)
+            if( _students.Count > 0)
             {
-                Console.WriteLine($"{student.GetId()} - {student.GetLastName()} - {student.GetFirstName()}");
+                int index = 0;
+                foreach (Student student in _students)
+                {
+                    Console.WriteLine($"{index} - {student.GetLastName()} - {student.GetFirstName()}");
+                    Console.WriteLine(_students[index].GetLastName());
+                    index++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Il n'y a pas d'étudiant pour le moment.");
             }
         }
 
@@ -77,9 +87,9 @@
         }
 
         // Consulter un élève existant
-        public void DisplayStudent(uint id)
+        public void DisplayStudent(int index)
         {
-            Student student = GetStudentById(id);
+            Student student = Students[index];
 
             // Prototype d'affichage
             Console.WriteLine("----------------------------------------------------------------------");
@@ -118,23 +128,15 @@
             gradeValue = Single.Parse(Console.ReadLine());
             Console.Write("Entrez une appréciation : ");
             observation = Console.ReadLine();
-
-            if (observation == "")
-            {
-                student.AddGrade(new Grade(courseId, gradeValue));
-            }
-            else
-            {
-                student.AddGrade(new Grade(courseId, gradeValue, observation));
-            }
+            student.AddGrade(new Grade(courseId, student.GetId(), gradeValue, observation));
         }
 
         // Retrouver un étudiant à partir de son identifiant uniquement
-        public Student GetStudentById(uint id)
+        public Student GetStudentByIndex(int index)
         {
             foreach (Student student in _students)
             {
-                if (student.GetId() == id)
+                if (student.GetId() == index)
                 {
                     return student;
                 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NationalEducation
+﻿namespace NationalEducation
 {
     internal class Program
     {
@@ -14,9 +12,9 @@ namespace NationalEducation
             // 
             // Etudiants
             // Cours
-            do
+            /*do
             {
-                Console.WriteLine("Application révolutionnaire\n");
+                Console.WriteLine("\nApplication révolutionnaire\n");
                 Console.WriteLine("0 : Etudiants");
                 Console.WriteLine("1 : Cours");
                 Console.WriteLine();
@@ -35,15 +33,37 @@ namespace NationalEducation
                         // Consulter un étudiants existant
                         // Ajouter une note et une appréciation pour un cours sur un étudiants existant
                         // Revenir au menu principal
-                        Console.WriteLine("Application révolutionnaire\n");
+                        Console.WriteLine("\nApplication révolutionnaire\n");
                         Console.WriteLine("0 : Lister les étudiants");
                         Console.WriteLine("1 : Créer un nouvel étudiants");
                         Console.WriteLine("2 : Consulter un étudiants existant");
                         Console.WriteLine("3 : Ajouter une note et une appréciation pour un cours sur un étudiants existant");
                         Console.WriteLine("4 : Revenir au menu principal");
                         Console.WriteLine();
+
                         Console.Write("Entrées : ");
                         userInput = Console.ReadLine();
+
+                        switch(userInput)
+                        {
+                            case "0":
+                                campusApp.ListAllStudents();                                
+                                break;
+                            case "1":
+                                campusApp.CreateNewStudent();
+                                break;
+                            case "2":
+                                campusApp.ListAllStudents();
+                                Console.Write("Entrées : ");
+                                userInput = Console.ReadLine();
+                                campusApp.DisplayStudent(Int32.Parse(userInput));
+                                break;
+                            case "3":
+                                // campusApp.AddGradeToStudent(campusApp.Students[0]);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     while (userInput != "exit" && userInput != "4");
                 }
@@ -57,40 +77,41 @@ namespace NationalEducation
                         // Ajouter un nouveau cours au programme
                         // Supprimer un cours par son identifiant
                         // Revenir au menu principal
-                        Console.WriteLine("Application révolutionnaire\n");
+                        Console.WriteLine("\nApplication révolutionnaire\n");
                         Console.WriteLine("0 : Lister les cours existants");
                         Console.WriteLine("1 : Ajouter un nouveau cours au programme");
                         Console.WriteLine("2 : Supprimer un cours par son identifiant");
                         Console.WriteLine("3 : Revenir au menu principal");
                         Console.WriteLine();
+
                         Console.Write("Entrées : ");
                         userInput = Console.ReadLine();
                     }
                     while (userInput != "exit" && userInput == "3");
                 }
             }
-            while (userInput != "exit");
+            while (userInput != "exit");*/
 
             // Créer un nouvel élève
-            // campusApp.CreateNewStudent();
-            // campusApp.CreateNewStudent();
+            campusApp.CreateNewStudent();
+            campusApp.CreateNewStudent();
 
             // Lister les élèves
-            // campusApp.ListAllStudents();
+            campusApp.ListAllStudents();
 
             // Ajouter un nouveau cours au programme
-            // campusApp.CreateNewCourse();
-            // campusApp.CreateNewCourse();
+            campusApp.CreateNewCourse();
+            campusApp.CreateNewCourse();
 
             // Lister les élèves
-            // campusApp.ListAllStudents();
+            campusApp.ListAllStudents();
 
             // Ajouter une note et une appréciation pour un cours sur un élève existant
-            // campusApp.AddGradeToStudent(campusApp.Students[0]);
-            // campusApp.AddGradeToStudent(campusApp.Students[0]);
+            campusApp.AddGradeToStudent(campusApp.Students[0]);
+            campusApp.AddGradeToStudent(campusApp.Students[0]);
 
             // Afficher un étudiant en particulier
-            // campusApp.DisplayStudent(0);
+            campusApp.DisplayStudent(0);
         }
     }
 }
