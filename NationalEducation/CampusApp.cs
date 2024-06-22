@@ -184,7 +184,7 @@ namespace NationalEducation
             bool isValid = false;
             string userInput = "";
             // Ne laisse pas passer les accents
-            string pattern = "^([A-Z]|[a-z])[a-z]{2,}(-([A-Z]|[a-z])[a-z]{2,})?$";
+            string pattern = ConstantValue.NAME_PATTERN;
 
             while(!isValid)
             {
@@ -196,7 +196,7 @@ namespace NationalEducation
                 }
                 else
                 {
-                    Console.WriteLine("Vous êtes limité à l'alphabet et au caractère spécial « - ».\n");
+                    Console.WriteLine(ConstantValue.NAME_ERROR_MESSAGE);
                 }
             }
 
@@ -213,13 +213,13 @@ namespace NationalEducation
             {
                 Console.Write(messageForUser);
                 userInput = Console.ReadLine();
-                if (DateTime.TryParseExact(userInput, "dd/MM/yyyy", null, DateTimeStyles.None, out date))
+                if (DateTime.TryParseExact(userInput, ConstantValue.DATE_FORMAT, null, DateTimeStyles.None, out date))
                 {
                     isValid = true;
                 }
                 else
                 {
-                    Console.WriteLine("Vous devez respecter le format jj/mm/aaaa.\n");
+                    Console.WriteLine(ConstantValue.DATE_ERROR_MESSAGE);
                 }
             }
 
