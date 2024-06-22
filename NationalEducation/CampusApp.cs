@@ -2,63 +2,32 @@
 {
     internal class CampusApp
     {
-        private uint _studentsId = 0;
         private uint _coursesId = 0;
-        private List<Student> _students = new List<Student>();
+        private uint _studentsId = 0;
+        private uint _gradeId = 0;
         private List<Course> _courses = new List<Course>();
+        public List<Student> Students { get; } = new List<Student>();
         private List<Grade> _grades = new List<Grade>();
 
-        public CampusApp(uint studentId, uint courseId, List<Student> students, List<Course> courses, List<Grade> grades)
+        public CampusApp(uint studentId, uint courseId, uint gradeId, List<Student> students, List<Course> courses, List<Grade> grades)
         {
-            _studentsId = studentId;
             _coursesId = courseId;
-            _students = students;
+            _studentsId = studentId;
+            _gradeId = gradeId; 
             _courses = courses;
+            Students = students;
             _grades = grades;
         }
-
-        public uint StudentsId
-        {
-            get => _studentsId;
-            set => _studentsId = value;
-        }
-
-        public uint CoursesId
-        {
-            get => _coursesId;
-            set => _coursesId = value;
-        }
-
-        public List<Student> Students
-        {
-            get => _students;
-            set => _students = value;
-        }
-
-        public List<Course> Courses
-        {
-            get => _courses;
-            set => _courses = value;
-        }
-
-        // Le menu Elèves permettra de :
-        // 
-        // Lister les étudiants
-        // Créer un nouvel étudiant
-        // Consulter un étudiant existant
-        // Ajouter une note et une appréciation pour un cours sur un étudiant existant
-        // Revenir au menu principal
 
         // Lister les étudiants
         public void ListAllStudents()
         {
-            if( _students.Count > 0)
+            if( Students.Count > 0)
             {
                 int index = 0;
-                foreach (Student student in _students)
+                foreach (Student student in Students)
                 {
-                    Console.WriteLine($"{index} - {student.GetLastName()} - {student.GetFirstName()}");
-                    Console.WriteLine(_students[index].GetLastName());
+                    Console.WriteLine($"{index} - {student.LastName} - {student.FirstName}");
                     index++;
                 }
             }
@@ -84,43 +53,44 @@
             Console.Write("Entrez une date de naissance (format : jj/mm/yyyy) : ");
             dateOfBirth = Console.ReadLine();
             DateTime dateDeNaissance = DateTime.Parse(dateOfBirth);
-            _students.Add(new Student(_studentsId, lastName, firstName, dateDeNaissance));
+            Students.Add(new Student(_studentsId, lastName, firstName, dateDeNaissance));
             _studentsId++;
         }
 
         // Consulter un élève existant
         public void DisplayStudent(int index)
         {
-            Student student = _students[index];
+            Student student = Students[index];
             List<Grade> gradesOfStudent = GetGradesOfStudent(student);
 
             // Prototype d'affichage
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("Informations sur l'élève :\n");
-            Console.WriteLine($"Nom               : {student.GetLastName()}");
-            Console.WriteLine($"Prénom            : {student.GetFirstName()}");
-            Console.WriteLine($"Date de naissance : {student.GetDateOfBirth()}\n");
+            Console.WriteLine($"Nom               : {student.LastName}");
+            Console.WriteLine($"Prénom            : {student.FirstName}");
+            Console.WriteLine($"Date de naissance : {student.DateOfBirth.ToString("dd/MM/yyyy")}\n");
             Console.WriteLine("Résultats scolaires :\n");
             float meanOfGrades = 0.0f;
             foreach (Grade grade in gradesOfStudent)
             {
-                Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.GetCourseId())}");
-                Console.WriteLine($"        Note : {grade.GetValue()}");
-                Console.WriteLine($"        Appréciation : {grade.GetObservation()}\n");
-                meanOfGrades += grade.GetValue();
+                Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.CourseId)}");
+                Console.WriteLine($"        Note : {grade.Value}");
+                Console.WriteLine($"        Appréciation : {grade.Observation}\n");
+                meanOfGrades += grade.Value;
             }
             Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
             Console.WriteLine("----------------------------------------------------------------------");
         }
 
         // Ajouter une note et une appréciation pour un cours sur un étudiant existant
+        // Il faudrait modifier cette méthode pour que ce soit l'index du cours qu'il faille entrer
         public void AddGradeToStudent(Student student)
         {
             uint courseId;
             float gradeValue;
             string observation;
 
-            Console.WriteLine($"Ajout d'une note à {student.GetLastName()} {student.GetFirstName()}\n");
+            Console.WriteLine($"Ajout d'une note à {student.LastName} {student.FirstName}\n");
             Console.WriteLine("Liste des cours\n");
             ListAllCourses();
 
@@ -131,20 +101,20 @@
             gradeValue = Single.Parse(Console.ReadLine());
             Console.Write("Entrez une appréciation : ");
             observation = Console.ReadLine();
-            _grades.Add(new Grade(courseId, student.GetId(), gradeValue, observation));
+            _grades.Add(new Grade(_gradeId ,courseId, student.Id, gradeValue, observation));
         }
 
         // Retrouver un étudiant à partir de son identifiant uniquement
         public Student GetStudentByIndex(int index)
         {
-            foreach (Student student in _students)
+            foreach (Student student in Students)
             {
-                if (student.GetId() == index)
+                if (student.Id == index)
                 {
                     return student;
                 }
             }
-            return _students[1];
+            return Students[1];
         }
 
         // Retrouver un étudiant à partir de son identifiant uniquement
@@ -154,7 +124,7 @@
 
             foreach (Grade grade in _grades)
             {
-                if(grade.GetStudentId() == student.GetId())
+                if(grade.StudentId == student.Id)
                 {
                     studentGrades.Add(grade);
                 }
@@ -175,7 +145,7 @@
         {
             foreach (Course course in _courses)
             {
-                Console.WriteLine($"{course.GetId()} - {course.GetName()}");
+                Console.WriteLine($"{course.Id} - {course.Name}");
             }
             Console.WriteLine();
         }
@@ -202,9 +172,9 @@
         {
             foreach (Course course in _courses)
             {
-                if (course.GetId() == id)
+                if (course.Id == id)
                 {
-                    return course.GetName();
+                    return course.Name;
                 }
             }
             return string.Empty;

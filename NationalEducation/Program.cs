@@ -5,7 +5,7 @@
         private static void Main(string[] args)
         {
             string userInput;
-            CampusApp campusApp = new CampusApp(0, 0, new List<Student>(), new List<Course>(), new List<Grade>());
+            CampusApp campusApp = new CampusApp(0, 0, 0, new List<Student>(), new List<Course>(), new List<Grade>());
 
             // Menu
             // Au lancement de l'application, un menu permettra à l'utilisateur de choisir entre ces entrées :
@@ -92,11 +92,13 @@
             }
             while (userInput != "exit");*/
 
-            // Créer un nouvel élève
+            // Prototype en "dur"
+
+            // Créer un nouvel étudiant
             campusApp.CreateNewStudent();
             campusApp.CreateNewStudent();
 
-            // Lister les élèves
+            // Lister les étudiants
             campusApp.ListAllStudents();
 
             // Ajouter un nouveau cours au programme
@@ -106,11 +108,11 @@
             // Lister les élèves
             campusApp.ListAllStudents();
 
-            // Ajouter une note et une appréciation pour un cours sur un élève existant
+            // Ajouter une note et une appréciation pour un cours sur un étudiant existant
             campusApp.AddGradeToStudent(campusApp.Students[0]);
             campusApp.AddGradeToStudent(campusApp.Students[0]);
 
-            // Afficher un étudiant en particulier
+            // Afficher un étudiant en particulier en donnant l'index de la liste correspondant
             campusApp.DisplayStudent(0);
         }
     }

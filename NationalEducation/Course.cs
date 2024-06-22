@@ -2,17 +2,13 @@
 {
     internal class Course
     {
-        private readonly uint _id;
-        private string _name;
+        public uint Id { get; }
+        public string Name { get; }
 
         public Course(uint id, string name)
         {
-            _id = id;
-            _name = name;
+            Id = id;
+            Name = name;
         }
-
-        public uint GetId() => _id;
-
-        public string GetName() => _name;
     }
 }
