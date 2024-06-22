@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace NationalEducation
@@ -27,7 +28,7 @@ namespace NationalEducation
         {
             if( Students.Count > 0)
             {
-                Console.WriteLine("Liste des cours\n");
+                Console.WriteLine("Liste des étudiants\n");
 
                 int index = 0;
                 foreach (Student student in Students)
@@ -38,7 +39,7 @@ namespace NationalEducation
             }
             else
             {
-                Console.WriteLine("Il n'y a pas d'étudiant pour le moment.\n");
+                Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
             }
 
             Console.WriteLine();
@@ -62,47 +63,80 @@ namespace NationalEducation
         }
 
         // Consulter un élève existant
-        public void DisplayStudent(int index)
+        public void DisplayStudent()
         {
-            Student student = Students[index];
-            List<Grade> gradesOfStudent = GetGradesOfStudent(student);
+            int studentIndex;
 
-            // Prototype d'affichage
-            Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("Informations sur l'élève :\n");
-            Console.WriteLine($"Nom               : {student.LastName}");
-            Console.WriteLine($"Prénom            : {student.FirstName}");
-            Console.WriteLine($"Date de naissance : {student.DateOfBirth.ToString("dd/MM/yyyy")}\n");
-            Console.WriteLine("Résultats scolaires :\n");
-            float meanOfGrades = 0.0f;
-            foreach (Grade grade in gradesOfStudent)
+            if (Students.Count != 0)
             {
-                Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.CourseId)}");
-                Console.WriteLine($"        Note : {grade.Value}");
-                Console.WriteLine($"        Appréciation : {grade.Observation}\n");
-                meanOfGrades += grade.Value;
+                // On affiche la liste des étudiant et leur index
+                ListAllStudents();
+
+                studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant à afficher : ", Students.Count);
+
+                Student student = Students[studentIndex];
+                List<Grade> gradesOfStudent = GetGradesOfStudent(student);
+
+                // Prototype d'affichage
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine("Informations sur l'élève :\n");
+                Console.WriteLine($"Nom               : {student.LastName}");
+                Console.WriteLine($"Prénom            : {student.FirstName}");
+                Console.WriteLine($"Date de naissance : {student.DateOfBirth.ToString("dd/MM/yyyy")}\n");
+                Console.WriteLine("Résultats scolaires :\n");
+                float meanOfGrades = 0.0f;
+                foreach (Grade grade in gradesOfStudent)
+                {
+                    Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.CourseId)}");
+                    Console.WriteLine($"        Note : {grade.Value}");
+                    Console.WriteLine($"        Appréciation : {grade.Observation}\n");
+                    meanOfGrades += grade.Value;
+                }
+                Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
+                Console.WriteLine("----------------------------------------------------------------------");
             }
-            Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
-            Console.WriteLine("----------------------------------------------------------------------");
+            else
+            {
+                Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
+            }
         }
 
         // Ajouter une note et une appréciation pour un cours sur un étudiant existant
-        public void AddGradeToStudent(Student student)
+        public void AddGradeToStudent()
         {
-            int courseIndex;
+            int courseIndex, studentIndex;
             float gradeValue;
             string observation;
 
-            Console.WriteLine($"Ajout d'une note à {student.LastName} {student.FirstName}\n");
+            if (Students.Count != 0)
+            {
+                if (_courses.Count != 0)
+                {
+                    // On affiche la liste des étudiant et leur index
+                    ListAllStudents();
 
-            // On affiche la liste des cours et leur index
-            ListAllCourses();
+                    studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant pour lequel il faut entrer une note : ", Students.Count);
 
-            courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _courses.Count);
-            gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
-            observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
-            _grades.Add(new Grade(_gradeId , _courses[courseIndex].Id, student.Id, gradeValue, observation));
-            _gradeId++;
+                    Console.WriteLine($"Ajout d'une note à {Students[studentIndex].LastName} {Students[studentIndex].FirstName}\n");
+
+                    // On affiche la liste des cours et leur index
+                    ListAllCourses();
+
+                    courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _courses.Count);
+                    gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
+                    observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
+                    _grades.Add(new Grade(_gradeId, _courses[courseIndex].Id, Students[studentIndex].Id, gradeValue, observation));
+                    _gradeId++;
+                }
+                else
+                {
+                    Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
+                }
+            }
+            else
+            {
+                Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
+            }
         }
 
         // Obtenir les notes d'un étudiant
@@ -137,7 +171,7 @@ namespace NationalEducation
             }
             else
             {
-                Console.WriteLine("Il n'y a pas de cours pour le moment.\n");
+                Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
             }
             
             Console.WriteLine();

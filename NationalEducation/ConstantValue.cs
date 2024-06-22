@@ -12,5 +12,8 @@
         public const string DATE_ERROR_MESSAGE = "Vous devez respecter le format jj/mm/aaaa.\n";
 
         public const float MAX_GRADE = 20.0f;
+
+        public const string NO_STUDENTS_ERROR_MESSAGE = "Il n'y a pas d'étudiant pour le moment.\n";
+        public const string NO_COURSES_ERROR_MESSAGE = "Il n'y a pas de cours pour le moment.\n";
     }
 }

@@ -106,11 +106,12 @@
             campusApp.CreateNewCourse();
 
             // Ajouter une note et une appréciation pour un cours sur un étudiant existant
-            campusApp.AddGradeToStudent(campusApp.Students[0]);
-            campusApp.AddGradeToStudent(campusApp.Students[0]);
+            campusApp.AddGradeToStudent();
+            campusApp.AddGradeToStudent();
 
             // Afficher un étudiant en particulier en donnant l'index de la liste correspondant
-            campusApp.DisplayStudent(0);
+            campusApp.DisplayStudent();
+            campusApp.DisplayStudent();
         }
     }
 }
