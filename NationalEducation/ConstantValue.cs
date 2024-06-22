@@ -7,5 +7,7 @@
 
         public const string DATE_FORMAT = "dd/MM/yyyy";
         public const string DATE_ERROR_MESSAGE = "Vous devez respecter le format jj/mm/aaaa.\n";
+
+        public const float MAX_GRADE = 20.0f;
     }
 }

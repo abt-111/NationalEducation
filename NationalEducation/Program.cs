@@ -105,9 +105,6 @@
             campusApp.CreateNewCourse();
             campusApp.CreateNewCourse();
 
-            // Lister les élèves
-            campusApp.ListAllStudents();
-
             // Ajouter une note et une appréciation pour un cours sur un étudiant existant
             campusApp.AddGradeToStudent(campusApp.Students[0]);
             campusApp.AddGradeToStudent(campusApp.Students[0]);

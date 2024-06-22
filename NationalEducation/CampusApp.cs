@@ -27,6 +27,8 @@ namespace NationalEducation
         {
             if( Students.Count > 0)
             {
+                Console.WriteLine("Liste des cours\n");
+
                 int index = 0;
                 foreach (Student student in Students)
                 {
@@ -36,8 +38,10 @@ namespace NationalEducation
             }
             else
             {
-                Console.WriteLine("Il n'y a pas d'étudiant pour le moment.");
+                Console.WriteLine("Il n'y a pas d'étudiant pour le moment.\n");
             }
+
+            Console.WriteLine();
         }
 
         // Créer un nouvel étudiant
@@ -90,14 +94,12 @@ namespace NationalEducation
             string observation;
 
             Console.WriteLine($"Ajout d'une note à {student.LastName} {student.FirstName}\n");
-            Console.WriteLine("Liste des cours\n");
+
+            // On affiche la liste des cours et leur index
             ListAllCourses();
 
-            // On suppose qu'on entre le bon id pour le moment
-            Console.Write("Entrez l'index du cours pour la note à entrer : ");
-            courseIndex = Int32.Parse(Console.ReadLine());
-            Console.Write("Entrez la note : ");
-            gradeValue = Single.Parse(Console.ReadLine());
+            courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _courses.Count);
+            gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
             Console.Write("Entrez une appréciation : ");
             observation = Console.ReadLine();
             _grades.Add(new Grade(_gradeId , _courses[courseIndex].Id, student.Id, gradeValue, observation));
@@ -120,20 +122,25 @@ namespace NationalEducation
             return studentGrades;
         }
 
-        // Le menu Cours permettra de son côté de :
-        // 
-        // Lister les cours existants
-        // Ajouter un nouveau cours au programme
-        // Supprimer un cours par son identifiant
-        // Revenir au menu principal
-
         // Lister les cours existants
         public void ListAllCourses()
         {
-            foreach (Course course in _courses)
+            if (_courses.Count > 0)
             {
-                Console.WriteLine($"{course.Id} - {course.Name}");
+                Console.WriteLine("Liste des cours\n");
+
+                int index = 0;
+                foreach (Course course in _courses)
+                {
+                    Console.WriteLine($"{index} - {course.Name}");
+                    index++;
+                }
             }
+            else
+            {
+                Console.WriteLine("Il n'y a pas de cours pour le moment.\n");
+            }
+            
             Console.WriteLine();
         }
 
