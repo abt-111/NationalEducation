@@ -50,9 +50,9 @@ namespace NationalEducation
             // Créer un nouvel étudiant sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouvel étudiant\n");
             
-            lastName = GetAndValidNameInput("Entrez un nom : ");
-            firstName = GetAndValidNameInput("Entrez un prénom : ");
-            dateOfBirth = GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
+            lastName = InputValidator.GetAndValidNameInput("Entrez un nom : ");
+            firstName = InputValidator.GetAndValidNameInput("Entrez un prénom : ");
+            dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
             Students.Add(new Student(_studentsId, lastName, firstName, dateOfBirth));
             _studentsId++;
         }
@@ -83,10 +83,9 @@ namespace NationalEducation
         }
 
         // Ajouter une note et une appréciation pour un cours sur un étudiant existant
-        // Il faudrait modifier cette méthode pour que ce soit l'index du cours qu'il faille entrer
         public void AddGradeToStudent(Student student)
         {
-            uint courseId;
+            int courseIndex;
             float gradeValue;
             string observation;
 
@@ -95,29 +94,17 @@ namespace NationalEducation
             ListAllCourses();
 
             // On suppose qu'on entre le bon id pour le moment
-            Console.Write("Entrez l'identifiant du cours pour la note à entrer : ");
-            courseId = UInt32.Parse(Console.ReadLine());
+            Console.Write("Entrez l'index du cours pour la note à entrer : ");
+            courseIndex = Int32.Parse(Console.ReadLine());
             Console.Write("Entrez la note : ");
             gradeValue = Single.Parse(Console.ReadLine());
             Console.Write("Entrez une appréciation : ");
             observation = Console.ReadLine();
-            _grades.Add(new Grade(_gradeId ,courseId, student.Id, gradeValue, observation));
+            _grades.Add(new Grade(_gradeId , _courses[courseIndex].Id, student.Id, gradeValue, observation));
+            _gradeId++;
         }
 
-        // Retrouver un étudiant à partir de son identifiant uniquement
-        public Student GetStudentByIndex(int index)
-        {
-            foreach (Student student in Students)
-            {
-                if (student.Id == index)
-                {
-                    return student;
-                }
-            }
-            return Students[1];
-        }
-
-        // Retrouver un étudiant à partir de son identifiant uniquement
+        // Obtenir les notes d'un étudiant
         public List<Grade> GetGradesOfStudent(Student student)
         {
             List<Grade> studentGrades = new List<Grade>();
@@ -157,7 +144,7 @@ namespace NationalEducation
 
             // Créer un nouveau cours sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouveau cours\n");
-            name = GetAndValidNameInput("Entrez un nom pour le cour : ");
+            name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
             _courses.Add(new Course(_coursesId, name));
             _coursesId++;
         }
@@ -177,53 +164,6 @@ namespace NationalEducation
                 }
             }
             return string.Empty;
-        }
-
-        public string GetAndValidNameInput(string messageForUser)
-        {
-            bool isValid = false;
-            string userInput = "";
-            // Ne laisse pas passer les accents
-            string pattern = ConstantValue.NAME_PATTERN;
-
-            while(!isValid)
-            {
-                Console.Write(messageForUser);
-                userInput = Console.ReadLine();
-                if (Regex.IsMatch(userInput, pattern))
-                {
-                    isValid = true;
-                }
-                else
-                {
-                    Console.WriteLine(ConstantValue.NAME_ERROR_MESSAGE);
-                }
-            }
-
-            return userInput;
-        }
-
-        public DateTime GetAndValidDateInput(string messageForUser)
-        {
-            bool isValid = false;
-            string userInput;
-            DateTime date = DateTime.Now;
-
-            while (!isValid)
-            {
-                Console.Write(messageForUser);
-                userInput = Console.ReadLine();
-                if (DateTime.TryParseExact(userInput, ConstantValue.DATE_FORMAT, null, DateTimeStyles.None, out date))
-                {
-                    isValid = true;
-                }
-                else
-                {
-                    Console.WriteLine(ConstantValue.DATE_ERROR_MESSAGE);
-                }
-            }
-
-            return date;
         }
     }
 }
