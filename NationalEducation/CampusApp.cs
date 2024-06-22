@@ -1,4 +1,6 @@
-﻿namespace NationalEducation
+﻿using System.Text.RegularExpressions;
+
+namespace NationalEducation
 {
     internal class CampusApp
     {
@@ -46,10 +48,9 @@
 
             // Créer un nouvel étudiant sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouvel étudiant\n");
-            Console.Write("Entrez un nom : ");
-            lastName = Console.ReadLine();
-            Console.Write("Entrez un prénom : ");
-            firstName = Console.ReadLine();
+            
+            lastName = GetAndValidNameInput("Entrez un nom : ");
+            firstName = GetAndValidNameInput("Entrez un prénom : ");
             Console.Write("Entrez une date de naissance (format : jj/mm/yyyy) : ");
             dateOfBirth = Console.ReadLine();
             DateTime dateDeNaissance = DateTime.Parse(dateOfBirth);
@@ -157,8 +158,7 @@
 
             // Créer un nouveau cours sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouveau cours\n");
-            Console.Write("Entrez un nom : ");
-            name = Console.ReadLine();
+            name = GetAndValidNameInput("Entrez un nom pour le cour : ");
             _courses.Add(new Course(_coursesId, name));
             _coursesId++;
         }
@@ -178,6 +178,30 @@
                 }
             }
             return string.Empty;
+        }
+
+        public string GetAndValidNameInput(string messageForUser)
+        {
+            bool isValid = false;
+            string userInput = "";
+            // Ne laisse pas passer les accents
+            string pattern = "^([A-Z]|[a-z])[a-z]{2,}(-([A-Z]|[a-z])[a-z]{2,})?$";
+
+            while(!isValid)
+            {
+                Console.Write(messageForUser);
+                userInput = Console.ReadLine();
+                if (Regex.IsMatch(userInput, pattern))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Vous êtes limité à l'alphabet et au caractère spécial « - »\n");
+                }
+            }
+
+            return userInput;
         }
     }
 }
