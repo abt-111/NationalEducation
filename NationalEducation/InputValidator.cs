@@ -5,7 +5,7 @@ namespace NationalEducation
 {
     internal static class InputValidator
     {
-        public static int GetAndValidIndexInput(string messageForUser, int maxIndex)
+        public static int GetAndValidIndexInput(string indicationForUser, int maxIndex)
         {
             bool isValid = false;
             string userInput = "";
@@ -13,7 +13,7 @@ namespace NationalEducation
 
             while (!isValid)
             {
-                Console.Write(messageForUser);
+                Console.Write(indicationForUser);
                 userInput = Console.ReadLine();
                 if (Int32.TryParse(userInput, out index))
                 {
@@ -35,7 +35,7 @@ namespace NationalEducation
             return index;
         }
 
-        public static float GetAndValidGradeInput(string messageForUser)
+        public static float GetAndValidGradeInput(string indicationForUser)
         {
             bool isValid = false;
             string userInput = "";
@@ -43,7 +43,7 @@ namespace NationalEducation
 
             while (!isValid)
             {
-                Console.Write(messageForUser);
+                Console.Write(indicationForUser);
                 userInput = Console.ReadLine();
                 if (Single.TryParse(userInput, out gradeValue))
                 {
@@ -65,7 +65,7 @@ namespace NationalEducation
             return gradeValue;
         }
 
-        public static string GetAndValidNameInput(string messageForUser)
+        public static string GetAndValidNameInput(string indicationForUser)
         {
             bool isValid = false;
             string userInput = "";
@@ -74,7 +74,7 @@ namespace NationalEducation
 
             while (!isValid)
             {
-                Console.Write(messageForUser);
+                Console.Write(indicationForUser);
                 userInput = Console.ReadLine();
                 if (Regex.IsMatch(userInput, pattern))
                 {
@@ -89,7 +89,31 @@ namespace NationalEducation
             return userInput;
         }
 
-        public static DateTime GetAndValidDateInput(string messageForUser)
+        public static string GetAndValidObservationInput(string indicationForUser)
+        {
+            bool isValid = false;
+            string userInput = "";
+            // Ne laisse pas passer les accents
+            string pattern = ConstantValue.OBSERVATION_PATTERN;
+
+            while (!isValid)
+            {
+                Console.Write(indicationForUser);
+                userInput = Console.ReadLine();
+                if (Regex.IsMatch(userInput, pattern) || userInput == string.Empty)
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine(ConstantValue.OBSERVATION_ERROR_MESSAGE);
+                }
+            }
+
+            return userInput;
+        }
+
+        public static DateTime GetAndValidDateInput(string indicationForUser)
         {
             bool isValid = false;
             string userInput;
@@ -97,7 +121,7 @@ namespace NationalEducation
 
             while (!isValid)
             {
-                Console.Write(messageForUser);
+                Console.Write(indicationForUser);
                 userInput = Console.ReadLine();
                 if (DateTime.TryParseExact(userInput, ConstantValue.DATE_FORMAT, null, DateTimeStyles.None, out date))
                 {

@@ -100,8 +100,7 @@ namespace NationalEducation
 
             courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _courses.Count);
             gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
-            Console.Write("Entrez une appréciation : ");
-            observation = Console.ReadLine();
+            observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
             _grades.Add(new Grade(_gradeId , _courses[courseIndex].Id, student.Id, gradeValue, observation));
             _gradeId++;
         }
