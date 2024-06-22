@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace NationalEducation
 {
@@ -44,17 +45,15 @@ namespace NationalEducation
         {
             string lastName;
             string firstName;
-            string dateOfBirth;
+            DateTime dateOfBirth;
 
             // Créer un nouvel étudiant sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouvel étudiant\n");
             
             lastName = GetAndValidNameInput("Entrez un nom : ");
             firstName = GetAndValidNameInput("Entrez un prénom : ");
-            Console.Write("Entrez une date de naissance (format : jj/mm/yyyy) : ");
-            dateOfBirth = Console.ReadLine();
-            DateTime dateDeNaissance = DateTime.Parse(dateOfBirth);
-            Students.Add(new Student(_studentsId, lastName, firstName, dateDeNaissance));
+            dateOfBirth = GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
+            Students.Add(new Student(_studentsId, lastName, firstName, dateOfBirth));
             _studentsId++;
         }
 
@@ -197,11 +196,34 @@ namespace NationalEducation
                 }
                 else
                 {
-                    Console.WriteLine("Vous êtes limité à l'alphabet et au caractère spécial « - »\n");
+                    Console.WriteLine("Vous êtes limité à l'alphabet et au caractère spécial « - ».\n");
                 }
             }
 
             return userInput;
+        }
+
+        public DateTime GetAndValidDateInput(string messageForUser)
+        {
+            bool isValid = false;
+            string userInput;
+            DateTime date = DateTime.Now;
+
+            while (!isValid)
+            {
+                Console.Write(messageForUser);
+                userInput = Console.ReadLine();
+                if (DateTime.TryParseExact(userInput, "dd/MM/yyyy", null, DateTimeStyles.None, out date))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Vous devez respecter le format jj/mm/aaaa.\n");
+                }
+            }
+
+            return date;
         }
     }
 }
