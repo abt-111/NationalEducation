@@ -4,7 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            string userInput;
+            // string userInput;
             CampusApp campusApp = new CampusApp(0, 0, 0, new List<Student>(), new List<Course>(), new List<Grade>());
 
             // Menu
