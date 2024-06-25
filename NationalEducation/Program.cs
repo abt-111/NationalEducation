@@ -112,6 +112,11 @@
             // Afficher un étudiant en particulier en donnant l'index de la liste correspondant
             campusApp.DisplayStudent();
             campusApp.DisplayStudent();
+
+            //Suppression du cours
+            campusApp.DeleteCourse();
+
+            campusApp.ListAllCourses();
         }
     }
 }

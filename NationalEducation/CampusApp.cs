@@ -182,6 +182,37 @@ namespace NationalEducation
 
         // Supprimer un cours par son identifiant
         // Fonctions DeleteCourseById à créer
+        public void DeleteCourse()
+        {
+            int index;
+            string reponse = "";
+
+            if(_courses.Count > 0)
+            {
+                // On affiche la liste des cours et leur index
+                ListAllCourses();
+
+                index = InputValidator.GetAndValidIndexInput("Entrez l'index du cours à supprimer : ", _courses.Count);
+                Course course = _courses[index];
+
+                Console.Write("Vous allez supprimer le cours de {course.Name}. Confirmer O pour Oui et N pour Non : ");
+                reponse = Console.ReadLine();
+
+                if(reponse.Equals("O"))
+                {
+                    _grades.RemoveAll(x => x.CourseId == course.Id);
+                    _courses.Remove(course);
+                }
+                else
+                {
+                    Console.WriteLine("Suppression annulé");
+                }
+            }
+            else
+            {
+                Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
+            }
+        }
 
         // Retrouver le nom d'un cours à partir de son identifiant uniquement
         // Revoir la fonction pour qu'elle renvoie carrement l'objet
