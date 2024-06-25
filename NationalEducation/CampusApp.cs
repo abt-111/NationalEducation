@@ -101,15 +101,20 @@ namespace NationalEducation
                 Console.WriteLine($"Prénom            : {student.FirstName}");
                 Console.WriteLine($"Date de naissance : {student.DateOfBirth.ToString("dd/MM/yyyy")}\n");
                 Console.WriteLine("Résultats scolaires :\n");
-                float meanOfGrades = 0.0f;
-                foreach (Grade grade in gradesOfStudent)
+
+                if(gradesOfStudent.Count > 0)
                 {
-                    Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.CourseId)}");
-                    Console.WriteLine($"        Note : {grade.Value}");
-                    Console.WriteLine($"        Appréciation : {grade.Observation}\n");
-                    meanOfGrades += grade.Value;
+                    float meanOfGrades = 0.0f;
+
+                    foreach (Grade grade in gradesOfStudent)
+                    {
+                        Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.CourseId)}");
+                        Console.WriteLine($"        Note : {grade.Value}");
+                        Console.WriteLine($"        Appréciation : {grade.Observation}\n");
+                        meanOfGrades += grade.Value;
+                    }
+                    Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
                 }
-                Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
                 Console.WriteLine("----------------------------------------------------------------------");
             }
         }

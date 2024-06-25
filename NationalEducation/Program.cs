@@ -4,7 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            // string userInput;
+            string userInput;
             CampusApp campusApp = new CampusApp(0, 0, 0, new List<Student>(), new List<Course>(), new List<Grade>());
 
             // Menu
@@ -12,7 +12,7 @@
             // 
             // Etudiants
             // Cours
-            /*do
+            do
             {
                 Console.WriteLine("\nApplication révolutionnaire\n");
                 Console.WriteLine("0 : Etudiants");
@@ -53,13 +53,10 @@
                                 campusApp.CreateNewStudent();
                                 break;
                             case "2":
-                                campusApp.ListAllStudents();
-                                Console.Write("Entrées : ");
-                                userInput = Console.ReadLine();
-                                campusApp.DisplayStudent(Int32.Parse(userInput));
+                                campusApp.DisplayStudent();
                                 break;
                             case "3":
-                                // campusApp.AddGradeToStudent(campusApp.Students[0]);
+                                campusApp.AddGradeToStudent();
                                 break;
                             default:
                                 break;
@@ -80,43 +77,58 @@
                         Console.WriteLine("\nApplication révolutionnaire\n");
                         Console.WriteLine("0 : Lister les cours existants");
                         Console.WriteLine("1 : Ajouter un nouveau cours au programme");
-                        Console.WriteLine("2 : Supprimer un cours par son identifiant");
+                        Console.WriteLine("2 : Supprimer un cours");
                         Console.WriteLine("3 : Revenir au menu principal");
                         Console.WriteLine();
 
                         Console.Write("Entrées : ");
                         userInput = Console.ReadLine();
+
+                        switch (userInput)
+                        {
+                            case "0":
+                                campusApp.ListAllCourses();
+                                break;
+                            case "1":
+                                campusApp.CreateNewCourse();
+                                break;
+                            case "2":
+                                campusApp.DeleteCourse();
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                    while (userInput != "exit" && userInput == "3");
+                    while (userInput != "exit" && userInput != "3");
                 }
             }
-            while (userInput != "exit");*/
+            while (userInput != "exit");
 
             // Prototype en "dur"
 
             // Créer un nouvel étudiant
-            campusApp.CreateNewStudent();
-            campusApp.CreateNewStudent();
+            // campusApp.CreateNewStudent();
+            // campusApp.CreateNewStudent();
 
             // Lister les étudiants
-            campusApp.ListAllStudents();
+            // campusApp.ListAllStudents();
 
             // Ajouter un nouveau cours au programme
-            campusApp.CreateNewCourse();
-            campusApp.CreateNewCourse();
+            // campusApp.CreateNewCourse();
+            // campusApp.CreateNewCourse();
 
             // Ajouter une note et une appréciation pour un cours sur un étudiant existant
-            campusApp.AddGradeToStudent();
-            campusApp.AddGradeToStudent();
+            // campusApp.AddGradeToStudent();
+            // campusApp.AddGradeToStudent();
 
             // Afficher un étudiant en particulier en donnant l'index de la liste correspondant
-            campusApp.DisplayStudent();
-            campusApp.DisplayStudent();
+            // campusApp.DisplayStudent();
+            // campusApp.DisplayStudent();
 
-            //Suppression du cours
-            campusApp.DeleteCourse();
+            // Suppression du cours
+            // campusApp.DeleteCourse();
 
-            campusApp.ListAllCourses();
+            // campusApp.ListAllCourses();
         }
     }
 }
