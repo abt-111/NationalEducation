@@ -62,8 +62,8 @@ namespace NationalEducation
             _studentsId++;
         }
 
-        // Consulter un élève existant
-        public void DisplayStudent()
+        // Sélectionner un étudiant
+        public Student SelectStudent()
         {
             int studentIndex;
 
@@ -72,9 +72,26 @@ namespace NationalEducation
                 // On affiche la liste des étudiant et leur index
                 ListAllStudents();
 
-                studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant à afficher : ", Students.Count);
+                studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant pour le sélectionner : ", Students.Count);
 
-                Student student = Students[studentIndex];
+                return Students[studentIndex];
+            }
+            else
+            {
+                Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
+            }
+
+            return null;
+        }
+
+        // Consulter un élève existant
+        public void DisplayStudent()
+        {
+            Console.WriteLine("Affichage d'un étudiant\n");
+            Student student = SelectStudent();
+
+            if(student != null)
+            {
                 List<Grade> gradesOfStudent = GetGradesOfStudent(student);
 
                 // Prototype d'affichage
@@ -95,29 +112,23 @@ namespace NationalEducation
                 Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
                 Console.WriteLine("----------------------------------------------------------------------");
             }
-            else
-            {
-                Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
-            }
         }
 
         // Ajouter une note et une appréciation pour un cours sur un étudiant existant
         public void AddGradeToStudent()
         {
-            int courseIndex, studentIndex;
+            int courseIndex;
             float gradeValue;
             string observation;
 
-            if (Students.Count != 0)
+            if (_courses.Count != 0)
             {
-                if (_courses.Count != 0)
+                Console.WriteLine("Ajout de note à un étudiant\n");
+                Student student = SelectStudent();
+
+                if (student != null)
                 {
-                    // On affiche la liste des étudiant et leur index
-                    ListAllStudents();
-
-                    studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant pour lequel il faut entrer une note : ", Students.Count);
-
-                    Console.WriteLine($"Ajout d'une note à {Students[studentIndex].LastName} {Students[studentIndex].FirstName}\n");
+                    Console.WriteLine($"Ajout d'une note à {student.LastName} {student.FirstName}\n");
 
                     // On affiche la liste des cours et leur index
                     ListAllCourses();
@@ -125,17 +136,13 @@ namespace NationalEducation
                     courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _courses.Count);
                     gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
                     observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
-                    _grades.Add(new Grade(_gradeId, _courses[courseIndex].Id, Students[studentIndex].Id, gradeValue, observation));
+                    _grades.Add(new Grade(_gradeId, _courses[courseIndex].Id, student.Id, gradeValue, observation));
                     _gradeId++;
-                }
-                else
-                {
-                    Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
                 }
             }
             else
             {
-                Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
+                Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
             }
         }
 
