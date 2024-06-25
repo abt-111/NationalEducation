@@ -92,7 +92,7 @@ namespace NationalEducation
 
             if(student != null)
             {
-                List<Grade> gradesOfStudent = GetGradesOfStudent(student);
+                List<Grade> gradesOfStudent = student.GetGradesOfStudent(_grades);
 
                 // Prototype d'affichage
                 Console.WriteLine("----------------------------------------------------------------------");
@@ -144,22 +144,6 @@ namespace NationalEducation
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
             }
-        }
-
-        // Obtenir les notes d'un étudiant
-        public List<Grade> GetGradesOfStudent(Student student)
-        {
-            List<Grade> studentGrades = new List<Grade>();
-
-            foreach (Grade grade in _grades)
-            {
-                if(grade.StudentId == student.Id)
-                {
-                    studentGrades.Add(grade);
-                }
-            }
-
-            return studentGrades;
         }
 
         // Lister les cours existants

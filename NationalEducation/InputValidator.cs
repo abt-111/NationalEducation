@@ -117,7 +117,7 @@ namespace NationalEducation
         {
             bool isValid = false;
             string userInput;
-            DateTime date = DateTime.Now;
+            DateTime date = DateTime.MinValue;
 
             while (!isValid)
             {

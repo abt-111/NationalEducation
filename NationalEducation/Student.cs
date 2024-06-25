@@ -13,6 +13,22 @@
             LastName = lastName;
             FirstName = firstName;
             DateOfBirth = dateOfBirth;
-        }        
+        }
+
+        // Obtenir la liste des notes de l'étudiant
+        public List<Grade> GetGradesOfStudent(List<Grade> grades)
+        {
+            List<Grade> studentGrades = new List<Grade>();
+
+            foreach (Grade grade in grades)
+            {
+                if (grade.StudentId == Id)
+                {
+                    studentGrades.Add(grade);
+                }
+            }
+
+            return studentGrades;
+        }
     }
 }
