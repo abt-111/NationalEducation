@@ -1,11 +1,24 @@
-﻿namespace NationalEducation
+﻿using Newtonsoft.Json;
+
+namespace NationalEducation
 {
     internal class Program
     {
         private static void Main(string[] args)
         {
+            string path = Directory.GetCurrentDirectory();
+            path = path.Replace("\\bin\\Debug\\net8.0", "");
+
             string userInput;
-            CampusApp campusApp = new CampusApp(0, 0, 0, new List<Student>(), new List<Course>(), new List<Grade>());
+
+            // Read the JSON string from the file
+            var jsonString = File.ReadAllText($"{path}\\save.JSON");
+
+            // Deserialize the JSON string to an instance of SchoolApp
+
+            AppData appData = JsonConvert.DeserializeObject<AppData>(jsonString);
+
+            CampusApp campusApp = new CampusApp(appData);
 
             // Menu
             // Au lancement de l'application, un menu permettra à l'utilisateur de choisir entre ces entrées :
@@ -22,7 +35,7 @@
                 Console.Write("Entrées : ");
                 userInput = Console.ReadLine();
 
-                if(userInput == "0")
+                if (userInput == "0")
                 {
                     do
                     {
@@ -44,10 +57,10 @@
                         Console.Write("Entrées : ");
                         userInput = Console.ReadLine();
 
-                        switch(userInput)
+                        switch (userInput)
                         {
                             case "0":
-                                campusApp.ListAllStudents();                                
+                                campusApp.ListAllStudents();
                                 break;
                             case "1":
                                 campusApp.CreateNewStudent();
@@ -64,7 +77,7 @@
                     }
                     while (userInput != "exit" && userInput != "4");
                 }
-                else if(userInput == "1")
+                else if (userInput == "1")
                 {
                     do
                     {
@@ -104,31 +117,7 @@
             }
             while (userInput != "exit");
 
-            // Prototype en "dur"
-
-            // Créer un nouvel étudiant
-            // campusApp.CreateNewStudent();
-            // campusApp.CreateNewStudent();
-
-            // Lister les étudiants
-            // campusApp.ListAllStudents();
-
-            // Ajouter un nouveau cours au programme
-            // campusApp.CreateNewCourse();
-            // campusApp.CreateNewCourse();
-
-            // Ajouter une note et une appréciation pour un cours sur un étudiant existant
-            // campusApp.AddGradeToStudent();
-            // campusApp.AddGradeToStudent();
-
-            // Afficher un étudiant en particulier en donnant l'index de la liste correspondant
-            // campusApp.DisplayStudent();
-            // campusApp.DisplayStudent();
-
-            // Suppression du cours
-            // campusApp.DeleteCourse();
-
-            // campusApp.ListAllCourses();
+            File.WriteAllText($"{path}\\test.JSON", JsonConvert.SerializeObject(appData, Formatting.Indented));
         }
     }
 }

@@ -6,32 +6,39 @@ namespace NationalEducation
 {
     internal class CampusApp
     {
-        private uint _coursesId = 0;
-        private uint _studentsId = 0;
-        private uint _gradeId = 0;
-        private List<Course> _courses = new List<Course>();
-        public List<Student> Students { get; } = new List<Student>();
-        private List<Grade> _grades = new List<Grade>();
+        /*public uint CoursesId { get; private set; } = 0;
+        public uint StudentsId { get; private set; } = 0;
+        public uint GradeId { get; private set; } = 0;
+        public List<Course> Courses { get; private set; } = new List<Course>();
+        public List<Student> Students { get; private set; } = new List<Student>();
+        public List<Grade> Grades { get; private set; } = new List<Grade>();*/
 
-        public CampusApp(uint studentId, uint courseId, uint gradeId, List<Student> students, List<Course> courses, List<Grade> grades)
+        private AppData _appData;
+
+        /*public CampusApp(uint studentId, uint courseId, uint gradeId, List<Student> students, List<Course> courses, List<Grade> grades)
         {
-            _coursesId = courseId;
-            _studentsId = studentId;
-            _gradeId = gradeId; 
-            _courses = courses;
+            CoursesId = courseId;
+            StudentsId = studentId;
+            GradeId = gradeId; 
+            Courses = courses;
             Students = students;
-            _grades = grades;
+            Grades = grades;
+        }*/
+
+        public CampusApp(AppData appData)
+        {
+            _appData = appData;
         }
 
         // Lister les étudiants
         public void ListAllStudents()
         {
-            if( Students.Count > 0)
+            if(_appData.Students.Count > 0)
             {
                 Console.WriteLine("Liste des étudiants\n");
 
                 int index = 0;
-                foreach (Student student in Students)
+                foreach (Student student in _appData.Students)
                 {
                     Console.WriteLine($"{index} - {student.LastName} - {student.FirstName}");
                     index++;
@@ -58,8 +65,8 @@ namespace NationalEducation
             lastName = InputValidator.GetAndValidNameInput("Entrez un nom : ");
             firstName = InputValidator.GetAndValidNameInput("Entrez un prénom : ");
             dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
-            Students.Add(new Student(_studentsId, lastName, firstName, dateOfBirth));
-            _studentsId++;
+            _appData.Students.Add(new Student(_appData.StudentsId, lastName, firstName, dateOfBirth));
+            _appData.StudentsId++;
         }
 
         // Sélectionner un étudiant
@@ -67,14 +74,14 @@ namespace NationalEducation
         {
             int studentIndex;
 
-            if (Students.Count != 0)
+            if (_appData.Students.Count != 0)
             {
                 // On affiche la liste des étudiant et leur index
                 ListAllStudents();
 
-                studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant pour le sélectionner : ", Students.Count);
+                studentIndex = InputValidator.GetAndValidIndexInput("Entrez l'index de l'étudiant pour le sélectionner : ", _appData.Students.Count);
 
-                return Students[studentIndex];
+                return _appData.Students[studentIndex];
             }
             else
             {
@@ -92,7 +99,7 @@ namespace NationalEducation
 
             if(student != null)
             {
-                List<Grade> gradesOfStudent = student.GetGradesOfStudent(_grades);
+                List<Grade> gradesOfStudent = student.GetGradesOfStudent(_appData.Grades);
 
                 // Prototype d'affichage
                 Console.WriteLine("----------------------------------------------------------------------");
@@ -126,7 +133,7 @@ namespace NationalEducation
             float gradeValue;
             string observation;
 
-            if (_courses.Count != 0)
+            if (_appData.Courses.Count != 0)
             {
                 Console.WriteLine("Ajout de note à un étudiant\n");
                 Student student = SelectStudent();
@@ -138,11 +145,11 @@ namespace NationalEducation
                     // On affiche la liste des cours et leur index
                     ListAllCourses();
 
-                    courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _courses.Count);
+                    courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _appData.Courses.Count);
                     gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
                     observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
-                    _grades.Add(new Grade(_gradeId, _courses[courseIndex].Id, student.Id, gradeValue, observation));
-                    _gradeId++;
+                    _appData.Grades.Add(new Grade(_appData.GradeId, _appData.Courses[courseIndex].Id, student.Id, gradeValue, observation));
+                    _appData.GradeId++;
                 }
             }
             else
@@ -154,12 +161,12 @@ namespace NationalEducation
         // Lister les cours existants
         public void ListAllCourses()
         {
-            if (_courses.Count > 0)
+            if (_appData.Courses.Count > 0)
             {
                 Console.WriteLine("Liste des cours\n");
 
                 int index = 0;
-                foreach (Course course in _courses)
+                foreach (Course course in _appData.Courses)
                 {
                     Console.WriteLine($"{index} - {course.Name}");
                     index++;
@@ -181,8 +188,8 @@ namespace NationalEducation
             // Créer un nouveau cours sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouveau cours\n");
             name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
-            _courses.Add(new Course(_coursesId, name));
-            _coursesId++;
+            _appData.Courses.Add(new Course(_appData.CoursesId, name));
+            _appData.CoursesId++;
         }
 
         // Supprimer un cours par son identifiant
@@ -192,21 +199,21 @@ namespace NationalEducation
             int index;
             string reponse = "";
 
-            if(_courses.Count > 0)
+            if(_appData.Courses.Count > 0)
             {
                 // On affiche la liste des cours et leur index
                 ListAllCourses();
 
-                index = InputValidator.GetAndValidIndexInput("Entrez l'index du cours à supprimer : ", _courses.Count);
-                Course course = _courses[index];
+                index = InputValidator.GetAndValidIndexInput("Entrez l'index du cours à supprimer : ", _appData.Courses.Count);
+                Course course = _appData.Courses[index];
 
-                Console.Write("Vous allez supprimer le cours de {course.Name}. Confirmer O pour Oui et N pour Non : ");
+                Console.Write($"Vous allez supprimer le cours de {course.Name}. Confirmer O pour Oui et N pour Non : ");
                 reponse = Console.ReadLine();
 
                 if(reponse.Equals("O"))
                 {
-                    _grades.RemoveAll(x => x.CourseId == course.Id);
-                    _courses.Remove(course);
+                    _appData.Grades.RemoveAll(x => x.CourseId == course.Id);
+                    _appData.Courses.Remove(course);
                 }
                 else
                 {
@@ -223,7 +230,7 @@ namespace NationalEducation
         // Revoir la fonction pour qu'elle renvoie carrement l'objet
         public string GetCourseNameWithId(uint id)
         {
-            foreach (Course course in _courses)
+            foreach (Course course in _appData.Courses)
             {
                 if (course.Id == id)
                 {
