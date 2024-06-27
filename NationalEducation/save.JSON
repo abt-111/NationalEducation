@@ -1,7 +1,7 @@
 {
   "CoursesId": 1,
   "StudentsId": 2,
-  "GradeId": 2,
+  "GradeId": 3,
   "Courses": [
     {
       "Id": 0,
@@ -36,6 +36,13 @@
       "StudentId": 1,
       "Value": 18.0,
       "Observation": "Il manque deux points looser"
+    },
+    {
+      "Id": 2,
+      "CourseId": 0,
+      "StudentId": 1,
+      "Value": 20.0,
+      "Observation": "Mouais bon"
     }
   ]
 }

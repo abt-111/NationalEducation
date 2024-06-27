@@ -6,24 +6,8 @@ namespace NationalEducation
 {
     internal class CampusApp
     {
-        /*public uint CoursesId { get; private set; } = 0;
-        public uint StudentsId { get; private set; } = 0;
-        public uint GradeId { get; private set; } = 0;
-        public List<Course> Courses { get; private set; } = new List<Course>();
-        public List<Student> Students { get; private set; } = new List<Student>();
-        public List<Grade> Grades { get; private set; } = new List<Grade>();*/
 
         private AppData _appData;
-
-        /*public CampusApp(uint studentId, uint courseId, uint gradeId, List<Student> students, List<Course> courses, List<Grade> grades)
-        {
-            CoursesId = courseId;
-            StudentsId = studentId;
-            GradeId = gradeId; 
-            Courses = courses;
-            Students = students;
-            Grades = grades;
-        }*/
 
         public CampusApp(AppData appData)
         {

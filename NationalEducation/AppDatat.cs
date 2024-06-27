@@ -18,5 +18,15 @@
             Students = students;
             Grades = grades;
         }
+
+        public void SaveData()
+        {
+
+        }
+
+        public void LoadData()
+        {
+
+        }
     }
 }
