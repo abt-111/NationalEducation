@@ -1,4 +1,6 @@
-﻿namespace NationalEducation
+﻿using Newtonsoft.Json;
+
+namespace NationalEducation
 {
     internal class AppData
     {
@@ -17,16 +19,6 @@
             Courses = courses;
             Students = students;
             Grades = grades;
-        }
-
-        public void SaveData()
-        {
-
-        }
-
-        public void LoadData()
-        {
-
         }
     }
 }

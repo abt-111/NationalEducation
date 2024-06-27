@@ -1,11 +1,15 @@
 {
-  "CoursesId": 1,
+  "CoursesId": 2,
   "StudentsId": 2,
-  "GradeId": 3,
+  "GradeId": 4,
   "Courses": [
     {
       "Id": 0,
       "Name": "Mathematique"
+    },
+    {
+      "Id": 1,
+      "Name": "Francais"
     }
   ],
   "Students": [
@@ -43,6 +47,13 @@
       "StudentId": 1,
       "Value": 20.0,
       "Observation": "Mouais bon"
+    },
+    {
+      "Id": 3,
+      "CourseId": 1,
+      "StudentId": 0,
+      "Value": 9.99,
+      "Observation": "Encore un petit effort"
     }
   ]
 }

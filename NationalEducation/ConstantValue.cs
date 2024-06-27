@@ -15,5 +15,9 @@
 
         public const string NO_STUDENTS_ERROR_MESSAGE = "Il n'y a pas d'étudiant pour le moment.\n";
         public const string NO_COURSES_ERROR_MESSAGE = "Il n'y a pas de cours pour le moment.\n";
+
+        public const string PROJECT_PATH = "C:\\Users\\antho\\source\\repos\\NationalEducation\\NationalEducation";
+        public const string JSON_FILE_NAME = "save.JSON";
+        public const string JSON_FILE_PATH = $"{PROJECT_PATH}\\{JSON_FILE_NAME}";
     }
 }
