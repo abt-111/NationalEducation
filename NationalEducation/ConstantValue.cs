@@ -2,6 +2,10 @@
 {
     internal static class ConstantValue
     {
+        public const string INDENT_VALUE = "{0, -19} : {1}";
+        public const string TABULATION = "    ";
+        public const string SEPARATION = "----------------------------------------------------------------------";
+
         public const string NAME_PATTERN = "^([A-Z]|[a-z])[a-z]{2,}(-([A-Z]|[a-z])[a-z]{2,})?$";
         public const string NAME_ERROR_MESSAGE = "Vous êtes limité à l'alphabet et au caractère spécial « - ».\n";
 

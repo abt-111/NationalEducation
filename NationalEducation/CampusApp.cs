@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using NationalEducation.Models;
 
 namespace NationalEducation
 {
@@ -33,7 +35,7 @@ namespace NationalEducation
                 Console.WriteLine(ConstantValue.NO_STUDENTS_ERROR_MESSAGE);
             }
 
-            Console.WriteLine();
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Créer un nouvel étudiant
@@ -85,28 +87,25 @@ namespace NationalEducation
             {
                 List<Grade> gradesOfStudent = student.GetGradesOfStudent(_appData.Grades);
 
-                // Prototype d'affichage
-                Console.WriteLine("----------------------------------------------------------------------");
-                Console.WriteLine("Informations sur l'élève :\n");
-                Console.WriteLine($"Nom               : {student.LastName}");
-                Console.WriteLine($"Prénom            : {student.FirstName}");
-                Console.WriteLine($"Date de naissance : {student.DateOfBirth.ToString("dd/MM/yyyy")}\n");
-                Console.WriteLine("Résultats scolaires :\n");
+                Console.WriteLine("Informations sur l'étudiant :\n");
+                Console.WriteLine(ConstantValue.INDENT_VALUE, "Nom", student.LastName);
+                Console.WriteLine(ConstantValue.INDENT_VALUE, "Prénom", student.FirstName);
+                Console.WriteLine(ConstantValue.INDENT_VALUE, "Date de naissance", student.DateOfBirth.ToString("dd/MM/yyyy"));
+                Console.WriteLine("\nRésultats scolaires :");
 
                 if(gradesOfStudent.Count > 0)
                 {
-                    float meanOfGrades = 0.0f;
-
                     foreach (Grade grade in gradesOfStudent)
                     {
-                        Console.WriteLine($"    Cours : {GetCourseNameWithId(grade.CourseId)}");
-                        Console.WriteLine($"        Note : {grade.Value}");
-                        Console.WriteLine($"        Appréciation : {grade.Observation}\n");
-                        meanOfGrades += grade.Value;
+                        Console.WriteLine("\n{0}{1, -7} : {2}", ConstantValue.TABULATION, "Cours",  GetCourseNameWithId(grade.CourseId));
+                        Console.WriteLine("{0, -13} : {1}", "\tNote", grade.Value);
+                        Console.WriteLine("{0} : {1}", "\tAppréciation", grade.Observation);
                     }
-                    Console.WriteLine($"   Moyenne : {meanOfGrades / gradesOfStudent.Count}");
+
+                    float gradesOfStudentAverage = Student.GetGradesOfStudentAverage(gradesOfStudent);
+                    Console.WriteLine("\n{0}{1} : {2}", ConstantValue.TABULATION, "Moyenne", gradesOfStudentAverage);
                 }
-                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine(ConstantValue.SEPARATION);
             }
         }
 
@@ -140,6 +139,8 @@ namespace NationalEducation
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
             }
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Lister les cours existants
@@ -160,8 +161,8 @@ namespace NationalEducation
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
             }
-            
-            Console.WriteLine();
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Ajouter un nouveau cours au programme
@@ -174,6 +175,8 @@ namespace NationalEducation
             name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
             _appData.Courses.Add(new Course(_appData.CoursesId, name));
             _appData.CoursesId++;
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Supprimer un cours par son identifiant
@@ -208,6 +211,8 @@ namespace NationalEducation
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_ERROR_MESSAGE);
             }
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Retrouver le nom d'un cours à partir de son identifiant uniquement

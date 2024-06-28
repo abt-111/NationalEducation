@@ -1,4 +1,4 @@
-﻿namespace NationalEducation
+﻿namespace NationalEducation.Models
 {
     internal class Student
     {
@@ -18,17 +18,22 @@
         // Obtenir la liste des notes de l'étudiant
         public List<Grade> GetGradesOfStudent(List<Grade> grades)
         {
-            List<Grade> studentGrades = new List<Grade>();
+            List<Grade> gradesOfStudent = new List<Grade>();
 
             foreach (Grade grade in grades)
             {
                 if (grade.StudentId == Id)
                 {
-                    studentGrades.Add(grade);
+                    gradesOfStudent.Add(grade);
                 }
             }
 
-            return studentGrades;
+            return gradesOfStudent;
+        }
+
+        public static float GetGradesOfStudentAverage(List<Grade> gradesOfStudent)
+        {
+            return gradesOfStudent.Average(Grade => Grade.Value);
         }
     }
 }

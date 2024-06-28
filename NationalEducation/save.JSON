@@ -1,6 +1,6 @@
 {
   "CoursesId": 2,
-  "StudentsId": 2,
+  "StudentsId": 3,
   "GradeId": 4,
   "Courses": [
     {
@@ -24,6 +24,12 @@
       "LastName": "Cherry",
       "FirstName": "Sandy",
       "DateOfBirth": "1990-10-21T00:00:00"
+    },
+    {
+      "Id": 2,
+      "LastName": "Temmel",
+      "FirstName": "Anthony",
+      "DateOfBirth": "1993-06-08T00:00:00"
     }
   ],
   "Grades": [

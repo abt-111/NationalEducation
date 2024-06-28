@@ -1,4 +1,4 @@
-﻿namespace NationalEducation
+﻿namespace NationalEducation.Models
 {
     internal class Course
     {

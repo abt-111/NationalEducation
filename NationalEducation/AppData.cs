@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using NationalEducation.Models;
+using Newtonsoft.Json;
 
 namespace NationalEducation
 {
