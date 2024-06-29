@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using NationalEducation.Models;
+using Serilog;
 
 namespace NationalEducation
 {
@@ -105,6 +106,7 @@ namespace NationalEducation
                     float gradesOfStudentAverage = Student.GetGradesOfStudentAverage(gradesOfStudent);
                     Console.WriteLine("\n{0}{1} : {2}", ConstantValue.TABULATION, "Moyenne", gradesOfStudentAverage);
                 }
+                Log.Information("mon log de test");
                 Console.WriteLine(ConstantValue.SEPARATION);
             }
         }

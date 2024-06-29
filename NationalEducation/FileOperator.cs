@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Serilog;
+using Serilog.Events;
 
 namespace NationalEducation
 {
@@ -21,6 +23,15 @@ namespace NationalEducation
 
             // Convertion de la chaîne de caractères en une instance de AppData
             appData = JsonConvert.DeserializeObject<AppData>(jsonString);
+        }
+
+        public static void LogTest()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File(ConstantValue.LOG_FILE_PATH, LogEventLevel.Information)
+                .WriteTo.Console()
+                .CreateLogger();
         }
     }
 }

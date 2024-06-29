@@ -22,6 +22,8 @@
 
         public const string PROJECT_PATH = "C:\\Users\\antho\\source\\repos\\NationalEducation\\NationalEducation";
         public const string JSON_FILE_NAME = "save.JSON";
+        public const string LOG_FILE_NAME = "log.txt";
         public const string JSON_FILE_PATH = $"{PROJECT_PATH}\\{JSON_FILE_NAME}";
+        public const string LOG_FILE_PATH = $"{PROJECT_PATH}\\{LOG_FILE_NAME}";
     }
 }
