@@ -1,6 +1,8 @@
-﻿namespace NationalEducation.Models
+﻿using NationalEducation.Interfaces;
+
+namespace NationalEducation.Models
 {
-    internal class Grade
+    internal class Grade : IIdentifiable
     {
         // Un élève peut avoir plusieurs notes dans un même cours. La note doit donc avoir un identifiant unique.
         public uint Id { get; }

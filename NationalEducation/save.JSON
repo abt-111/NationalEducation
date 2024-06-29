@@ -1,15 +1,12 @@
 {
-  "CoursesId": 2,
-  "StudentsId": 3,
-  "GradeId": 4,
   "Courses": [
     {
       "Id": 0,
       "Name": "Mathematique"
     },
     {
-      "Id": 1,
-      "Name": "Francais"
+      "Id": 2,
+      "Name": "Informatique"
     }
   ],
   "Students": [
@@ -38,28 +35,28 @@
       "CourseId": 0,
       "StudentId": 0,
       "Value": 12.0,
-      "Observation": "Bof"
+      "Observation": "Moyen"
     },
     {
       "Id": 1,
-      "CourseId": 0,
-      "StudentId": 1,
+      "CourseId": 2,
+      "StudentId": 0,
       "Value": 18.0,
-      "Observation": "Il manque deux points looser"
+      "Observation": "Tres bien"
     },
     {
       "Id": 2,
       "CourseId": 0,
       "StudentId": 1,
-      "Value": 20.0,
-      "Observation": "Mouais bon"
+      "Value": 14.5,
+      "Observation": "Manque de concentration"
     },
     {
       "Id": 3,
-      "CourseId": 1,
-      "StudentId": 0,
-      "Value": 9.99,
-      "Observation": "Encore un petit effort"
+      "CourseId": 2,
+      "StudentId": 1,
+      "Value": 13.75,
+      "Observation": "Peut mieux faire"
     }
   ]
 }

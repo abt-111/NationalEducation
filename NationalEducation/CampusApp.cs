@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using NationalEducation.Models;
+using System.Linq;
 using Serilog;
+using NationalEducation.Models;
+using NationalEducation.Interfaces;
 
 namespace NationalEducation
 {
@@ -40,7 +42,7 @@ namespace NationalEducation
         }
 
         // Créer un nouvel étudiant
-        public void CreateNewStudent()
+        public void AddStudent()
         {
             string lastName;
             string firstName;
@@ -52,8 +54,7 @@ namespace NationalEducation
             lastName = InputValidator.GetAndValidNameInput("Entrez un nom : ");
             firstName = InputValidator.GetAndValidNameInput("Entrez un prénom : ");
             dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
-            _appData.Students.Add(new Student(_appData.StudentsId, lastName, firstName, dateOfBirth));
-            _appData.StudentsId++;
+            _appData.Students.Add(new Student(GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth));
         }
 
         // Sélectionner un étudiant
@@ -106,6 +107,10 @@ namespace NationalEducation
                     float gradesOfStudentAverage = Student.GetGradesOfStudentAverage(gradesOfStudent);
                     Console.WriteLine("\n{0}{1} : {2}", ConstantValue.TABULATION, "Moyenne", gradesOfStudentAverage);
                 }
+                else
+                {
+                    Console.WriteLine("\nAucunes notes à afficher pour le moment.");
+                }
                 Log.Information("mon log de test");
                 Console.WriteLine(ConstantValue.SEPARATION);
             }
@@ -133,8 +138,7 @@ namespace NationalEducation
                     courseIndex = InputValidator.GetAndValidIndexInput("Entrez l'index du cours pour la note à entrer : ", _appData.Courses.Count);
                     gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
                     observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
-                    _appData.Grades.Add(new Grade(_appData.GradeId, _appData.Courses[courseIndex].Id, student.Id, gradeValue, observation));
-                    _appData.GradeId++;
+                    _appData.Grades.Add(new Grade(GenerateId<Grade>(_appData.Grades), _appData.Courses[courseIndex].Id, student.Id, gradeValue, observation));
                 }
             }
             else
@@ -168,15 +172,14 @@ namespace NationalEducation
         }
 
         // Ajouter un nouveau cours au programme
-        public void CreateNewCourse()
+        public void AddCourse()
         {
             string name;
 
             // Créer un nouveau cours sans vérification de la conformité des données
             Console.WriteLine("Création d'un nouveau cours\n");
             name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
-            _appData.Courses.Add(new Course(_appData.CoursesId, name));
-            _appData.CoursesId++;
+            _appData.Courses.Add(new Course(GenerateId<Course>(_appData.Courses), name));
 
             Console.WriteLine(ConstantValue.SEPARATION);
         }
@@ -229,6 +232,14 @@ namespace NationalEducation
                 }
             }
             return string.Empty;
+        }
+
+        public uint GenerateId<T>(List<T> anyList) where T : IIdentifiable
+        {
+            if(anyList.Count == 0)
+                return 0;
+            else
+                return (anyList.Last().Id + 1);
         }
     }
 }

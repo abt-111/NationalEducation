@@ -5,8 +5,9 @@
         private static void Main(string[] args)
         {
 
-            // string path = Directory.GetCurrentDirectory();
-            // path = path.Replace("\\bin\\Debug\\net8.0", "");
+            //string path = Directory.GetCurrentDirectory();
+            //path = path.Replace("\\bin\\Debug\\net8.0", "");
+            //Console.WriteLine(path);
 
             FileOperator.LoadData(out AppData appData);
 
@@ -14,11 +15,9 @@
 
             CampusApp campusApp = new CampusApp(appData);
 
-            campusApp.DisplayStudent();
+            MenuApp.LaunchMenuApp(campusApp);
 
-            // MenuApp.LaunchMenuApp(campusApp);
-
-            // FileOperator.SaveData(appData);
+            FileOperator.SaveData(appData);
         }
     }
 }

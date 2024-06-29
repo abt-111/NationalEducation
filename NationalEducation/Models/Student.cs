@@ -1,6 +1,8 @@
-﻿namespace NationalEducation.Models
+﻿using NationalEducation.Interfaces;
+
+namespace NationalEducation.Models
 {
-    internal class Student
+    internal class Student : IIdentifiable
     {
         public uint Id { get; }
         public string LastName { get; }
@@ -9,7 +11,7 @@
 
         public Student(uint id, string lastName, string firstName, DateTime dateOfBirth)
         {
-            Id = id;
+            this.Id = id;
             LastName = lastName;
             FirstName = firstName;
             DateOfBirth = dateOfBirth;

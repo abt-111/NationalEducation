@@ -1,6 +1,8 @@
-﻿namespace NationalEducation.Models
+﻿using NationalEducation.Interfaces;
+
+namespace NationalEducation.Models
 {
-    internal class Course
+    internal class Course : IIdentifiable
     {
         public uint Id { get; }
         public string Name { get; }

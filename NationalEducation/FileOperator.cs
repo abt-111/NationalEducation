@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using NationalEducation.Models;
+using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
+using System.IO;
 
 namespace NationalEducation
 {
@@ -18,11 +20,18 @@ namespace NationalEducation
 
         public static void LoadData(out AppData appData)
         {
-            // Lecture du contenue du fichier JSON et affection dans une chaîne de caractères
-            string jsonString = File.ReadAllText(ConstantValue.JSON_FILE_PATH);
+            if(File.Exists(ConstantValue.JSON_FILE_PATH))
+            {
+                // Lecture du contenue du fichier JSON et affection dans une chaîne de caractères
+                string jsonString = File.ReadAllText(ConstantValue.JSON_FILE_PATH);
 
-            // Convertion de la chaîne de caractères en une instance de AppData
-            appData = JsonConvert.DeserializeObject<AppData>(jsonString);
+                // Convertion de la chaîne de caractères en une instance de AppData
+                appData = JsonConvert.DeserializeObject<AppData>(jsonString);
+            }
+            else
+            {
+                appData = new AppData(new List<Student>(), new List<Course>(), new List<Grade>());
+            }
         }
 
         public static void LogTest()

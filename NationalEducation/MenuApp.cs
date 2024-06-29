@@ -68,7 +68,7 @@
                     campusApp.ListAllStudents();
                     break;
                 case "1":
-                    campusApp.CreateNewStudent();
+                    campusApp.AddStudent();
                     break;
                 case "2":
                     campusApp.DisplayStudent();
@@ -99,7 +99,7 @@
                     campusApp.ListAllCourses();
                     break;
                 case "1":
-                    campusApp.CreateNewCourse();
+                    campusApp.AddCourse();
                     break;
                 case "2":
                     campusApp.DeleteCourse();
