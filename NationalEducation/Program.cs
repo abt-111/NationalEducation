@@ -4,14 +4,11 @@
     {
         private static void Main(string[] args)
         {
-
-            //string path = Directory.GetCurrentDirectory();
-            //path = path.Replace("\\bin\\Debug\\net8.0", "");
-            //Console.WriteLine(path);
-
-            FileOperator.LoadData(out AppData appData);
+            FileOperator.GeneratePath();
 
             FileOperator.LogTest();
+
+            FileOperator.LoadData(out AppData appData);
 
             CampusApp campusApp = new CampusApp(appData);
 

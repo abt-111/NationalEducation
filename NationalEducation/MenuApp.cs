@@ -1,4 +1,6 @@
-﻿namespace NationalEducation
+﻿using Serilog;
+
+namespace NationalEducation
 {
     internal static class MenuApp
     {
@@ -24,6 +26,8 @@
 
                         ChooseStudentMenu(userInput, campusApp);
                     }
+
+                    Log.Information("Retour au menu principal");
                 }
                 else if (userInput == "1")
                 {
@@ -36,6 +40,8 @@
 
                         ChooseCourseMenuOption(userInput, campusApp);
                     }
+
+                    Log.Information("Retour au menu principal");
                 }
             }
             while (userInput != "exit");
@@ -43,22 +49,26 @@
 
         public static void DisplayGeneralMenu()
         {
-            Console.WriteLine("\nApplication révolutionnaire\n");
+            Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Etudiants");
             Console.WriteLine("1 : Cours");
             Console.WriteLine();
+
+            Log.Information("Affichage du menu general");
         }
 
         // Student
         public static void DisplayStudentMenu()
         {
-            Console.WriteLine("\nApplication révolutionnaire\n");
+            Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Lister les étudiants");
             Console.WriteLine("1 : Créer un nouvel étudiants");
             Console.WriteLine("2 : Consulter un étudiants existant");
             Console.WriteLine("3 : Ajouter une note et une appréciation pour un cours sur un étudiants existant");
             Console.WriteLine("4 : Revenir au menu principal");
             Console.WriteLine();
+
+            Log.Information("Affichage du menu student");
         }
 
         public static void ChooseStudentMenu(string userInput, CampusApp campusApp)
@@ -85,12 +95,14 @@
         // Courses
         public static void DisplayCourseMenu()
         {
-            Console.WriteLine("\nApplication révolutionnaire\n");
+            Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Lister les cours existants");
             Console.WriteLine("1 : Ajouter un nouveau cours au programme");
             Console.WriteLine("2 : Supprimer un cours");
             Console.WriteLine("3 : Revenir au menu principal");
             Console.WriteLine();
+
+            Log.Information("Affichage du menu course");
         }
 
         public static void ChooseCourseMenuOption(string userInput, CampusApp campusApp)

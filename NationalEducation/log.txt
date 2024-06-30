@@ -1,8 +1,46 @@
-2024-06-29 16:33:47.296 +02:00 [INF] mon log de test
-2024-06-29 18:14:07.372 +02:00 [INF] mon log de test
-2024-06-29 19:22:51.831 +02:00 [INF] mon log de test
-2024-06-29 19:28:08.377 +02:00 [INF] mon log de test
-2024-06-29 19:28:21.596 +02:00 [INF] mon log de test
-2024-06-30 09:07:45.376 +02:00 [INF] mon log de test
-2024-06-30 10:17:36.749 +02:00 [INF] mon log de test
-2024-06-30 10:18:39.186 +02:00 [INF] mon log de test
+2024-06-30 17:29:10.478 +02:00 [INF] Chargement des données à partir du fichier C:\Users\antho\Source\Repos\abt-111\NationalEducation\NationalEducation\save.JSON
+2024-06-30 17:29:10.503 +02:00 [INF] Affichage du menu general
+2024-06-30 17:29:24.779 +02:00 [INF] Affichage du menu student
+2024-06-30 17:29:28.539 +02:00 [INF] Consultation de la liste des étudiants
+2024-06-30 17:29:28.541 +02:00 [INF] Affichage du menu student
+2024-06-30 17:29:40.210 +02:00 [INF] Consultation des détails de l'étudiant Temmel - Anthony
+2024-06-30 17:29:40.211 +02:00 [INF] Affichage du menu student
+2024-06-30 17:29:55.961 +02:00 [INF] Retour au menu principal
+2024-06-30 17:29:55.961 +02:00 [INF] Affichage du menu general
+2024-06-30 17:29:59.825 +02:00 [INF] Affichage du menu course
+2024-06-30 17:30:05.601 +02:00 [INF] Consultation de la liste des cours
+2024-06-30 17:30:05.601 +02:00 [INF] Affichage du menu course
+2024-06-30 17:30:50.837 +02:00 [INF] Ajout du cours Anglais
+2024-06-30 17:30:50.838 +02:00 [INF] Affichage du menu course
+2024-06-30 17:30:55.382 +02:00 [INF] Consultation de la liste des cours
+2024-06-30 17:30:55.383 +02:00 [INF] Affichage du menu course
+2024-06-30 17:31:00.878 +02:00 [INF] Retour au menu principal
+2024-06-30 17:31:00.878 +02:00 [INF] Affichage du menu general
+2024-06-30 17:31:04.406 +02:00 [INF] Affichage du menu course
+2024-06-30 17:31:11.797 +02:00 [INF] Suppression du cours de Anglais
+2024-06-30 17:31:11.798 +02:00 [INF] Affichage du menu course
+2024-06-30 17:31:49.315 +02:00 [INF] Retour au menu principal
+2024-06-30 17:31:49.316 +02:00 [INF] Affichage du menu general
+2024-06-30 17:31:53.920 +02:00 [INF] Sauvegarde des données dans le fichier C:\Users\antho\Source\Repos\abt-111\NationalEducation\NationalEducation\save.JSON
+2024-06-30 17:41:01.179 +02:00 [INF] Chargement des données à partir du fichier C:\Users\antho\Source\Repos\abt-111\NationalEducation\NationalEducation\save.JSON
+2024-06-30 17:41:01.195 +02:00 [INF] Affichage du menu general
+2024-06-30 17:41:28.707 +02:00 [INF] Affichage du menu general
+2024-06-30 17:41:33.616 +02:00 [INF] Affichage du menu student
+2024-06-30 17:42:19.013 +02:00 [INF] Annulation de la saisie d'une note pour l'étudiant Temmel - Anthony : Informatique 19,99 La perfection nest pas de ce monde
+2024-06-30 17:42:19.014 +02:00 [INF] Affichage du menu student
+2024-06-30 17:42:29.343 +02:00 [INF] Consultation des détails de l'étudiant Temmel - Anthony
+2024-06-30 17:42:29.344 +02:00 [INF] Affichage du menu student
+2024-06-30 17:42:41.500 +02:00 [INF] Retour au menu principal
+2024-06-30 17:48:42.616 +02:00 [INF] Affichage du menu general
+2024-06-30 17:48:46.387 +02:00 [INF] Affichage du menu student
+2024-06-30 17:48:53.063 +02:00 [INF] Consultation des détails de l'étudiant Bomber - Jean
+2024-06-30 17:48:53.063 +02:00 [INF] Affichage du menu student
+2024-06-30 17:48:58.922 +02:00 [INF] Consultation des détails de l'étudiant Cherry - Sandy
+2024-06-30 17:48:58.923 +02:00 [INF] Affichage du menu student
+2024-06-30 17:49:12.433 +02:00 [INF] Affichage du menu student
+2024-06-30 17:50:09.693 +02:00 [INF] Affichage du menu general
+2024-06-30 17:50:14.031 +02:00 [INF] Affichage du menu student
+2024-06-30 17:50:24.434 +02:00 [INF] Consultation des détails de l'étudiant Cherry - Sandy
+2024-06-30 17:50:24.434 +02:00 [INF] Affichage du menu student
+2024-06-30 18:36:34.122 +02:00 [INF] Affichage du menu general
+2024-06-30 18:36:37.577 +02:00 [INF] Affichage du menu student

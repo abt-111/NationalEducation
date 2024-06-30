@@ -8,6 +8,22 @@ namespace NationalEducation
 {
     internal static class FileOperator
     {
+        // Variables
+        public static string projectPath = "";
+        public static string jsonFilePath ="";
+        public static string logFilePath = "";
+        // Constantes
+        public const string JSON_FILE_NAME = "save.JSON";
+        public const string LOG_FILE_NAME = "log.txt";
+
+        public static void GeneratePath()
+        {
+            projectPath = Directory.GetCurrentDirectory();
+            projectPath = projectPath.Replace("\\bin\\Debug\\net8.0", "");
+            jsonFilePath = $"{projectPath}\\{JSON_FILE_NAME}";
+            logFilePath = $"{projectPath}\\{LOG_FILE_NAME}";
+        }
+
         public static void SaveData(AppData appData)
         {
             // Convertion de l'instance de AppData en chaîne de caractères formatée pour
@@ -15,15 +31,15 @@ namespace NationalEducation
             string jsonString = JsonConvert.SerializeObject(appData, Formatting.Indented);
 
             // Ecriture de la chaîne de caractères dans un fichier JSON
-            File.WriteAllText(ConstantValue.JSON_FILE_PATH, jsonString);
+            File.WriteAllText(jsonFilePath, jsonString);
         }
 
         public static void LoadData(out AppData appData)
         {
-            if(File.Exists(ConstantValue.JSON_FILE_PATH))
+            if(File.Exists(jsonFilePath))
             {
                 // Lecture du contenue du fichier JSON et affection dans une chaîne de caractères
-                string jsonString = File.ReadAllText(ConstantValue.JSON_FILE_PATH);
+                string jsonString = File.ReadAllText(jsonFilePath);
 
                 // Convertion de la chaîne de caractères en une instance de AppData
                 appData = JsonConvert.DeserializeObject<AppData>(jsonString);
@@ -38,7 +54,7 @@ namespace NationalEducation
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File(ConstantValue.LOG_FILE_PATH, LogEventLevel.Information)
+                .WriteTo.File(logFilePath, LogEventLevel.Information)
                 .WriteTo.Console()
                 .CreateLogger();
         }

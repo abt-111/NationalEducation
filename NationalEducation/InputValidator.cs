@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Dynamic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace NationalEducation
@@ -47,18 +48,18 @@ namespace NationalEducation
                 userInput = Console.ReadLine();
                 if (Single.TryParse(userInput, out gradeValue))
                 {
-                    if (gradeValue >= 0 && gradeValue <= ConstantValue.MAX_GRADE)
+                    if (gradeValue >= ConstantValue.MIN_GRADE && gradeValue <= ConstantValue.MAX_GRADE)
                     {
                         isValid = true;
                     }
                     else
                     {
-                        Console.WriteLine($"Vous devez entrer un réel compris entre 0 et {ConstantValue.MAX_GRADE}.\n");
+                        Console.WriteLine($"Vous devez entrer un réel compris entre {ConstantValue.MIN_GRADE} et {ConstantValue.MAX_GRADE}.\n");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Vous devez entrer un réel compris entre 0 et {ConstantValue.MAX_GRADE}.\n");
+                    Console.WriteLine($"Vous devez entrer un réel compris entre {ConstantValue.MIN_GRADE} et {ConstantValue.MAX_GRADE}.\n");
                 }
             }
 
@@ -125,7 +126,21 @@ namespace NationalEducation
                 userInput = Console.ReadLine();
                 if (DateTime.TryParseExact(userInput, ConstantValue.DATE_FORMAT, null, DateTimeStyles.None, out date))
                 {
-                    isValid = true;
+                    int ageInDays = GetAgeInDays(date);
+                    int age = GetAge(ageInDays);
+
+                    if (ageInDays < 0)
+                    {
+                        Console.WriteLine(ConstantValue.AGE_ERROR_MESSAGE);
+                    }
+                    else if (age > 120.0f)
+                    {
+                        Console.WriteLine($"Vous ne pouvez pas avoir {age} ans (cf. Génèse 6:3).\n");
+                    }
+                    else
+                    {
+                        isValid = true;
+                    }
                 }
                 else
                 {
@@ -134,6 +149,16 @@ namespace NationalEducation
             }
 
             return date;
+        }
+
+        public static int GetAgeInDays(DateTime date)
+        {
+            return (DateTime.Now - date).Days;
+        }
+
+        public static int GetAge(int numberOfDays)
+        {
+            return (int)(numberOfDays / ConstantValue.YEAR);
         }
     }
 }

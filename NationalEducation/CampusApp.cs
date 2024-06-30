@@ -7,6 +7,7 @@ using Serilog;
 using NationalEducation.Models;
 using NationalEducation.Interfaces;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace NationalEducation
 {
@@ -43,6 +44,8 @@ namespace NationalEducation
                 Console.WriteLine(ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
             }
 
+            Log.Information("Consultation de la liste des étudiants");
+
             Console.WriteLine(ConstantValue.SEPARATION);
         }
         public void ListAllCourses()
@@ -55,6 +58,8 @@ namespace NationalEducation
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_LIST_DESCRIPTION);
             }
+
+            Log.Information("Consultation de la liste des cours");
 
             Console.WriteLine(ConstantValue.SEPARATION);
         }
@@ -82,6 +87,10 @@ namespace NationalEducation
             dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
             // Ajout d'un nouvel étudiant dans la liste d'étudiants
             _appData.Students.Add(new Student(GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth));
+
+            Log.Information($"Ajout de l'étudiant {lastName} {firstName}");
+
+            FileOperator.SaveData(_appData);
 
             Console.WriteLine(ConstantValue.SEPARATION);
         }
@@ -114,19 +123,39 @@ namespace NationalEducation
                     }
 
                     float gradesOfStudentAverage = Student.GetGradesOfStudentAverage(gradesOfStudent);
-                    Console.WriteLine("\n{0}{1} : {2}", ConstantValue.TABULATION, "Moyenne", gradesOfStudentAverage);
+                    Console.WriteLine("\n{0}{1} : {2}", ConstantValue.TABULATION, "Moyenne", Math.Round(gradesOfStudentAverage, 1));
                 }
                 else
                 {
                     Console.WriteLine("\nAucunes notes à afficher pour le moment.");
                 }
-                Log.Information("mon log de test");
+
+                Log.Information($"Consultation des détails de l'étudiant {student.Name}");
+
                 Console.WriteLine(ConstantValue.SEPARATION);
             }
             else
             {
                 Console.WriteLine(ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
             }
+        }
+
+        // Ajouter un nouveau cours au programme
+        public void AddCourse()
+        {
+            string name;
+
+            Console.WriteLine("Création d'un nouveau cours\n");
+            // Saisie de l'utilisateur
+            name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
+            // Ajout d'un nouveau cours dans la list de cours
+            _appData.Courses.Add(new Course(GenerateId<Course>(_appData.Courses), name));
+
+            Log.Information($"Ajout du cours {name}");
+
+            FileOperator.SaveData(_appData);
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Ajouter une note et une appréciation pour un cours sur un étudiant existant
@@ -154,32 +183,38 @@ namespace NationalEducation
                     // Saisie de l'utilisateur
                     gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
                     observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
-                    // Ajout d'une nouvelle note dans la list de notes
-                    _appData.Grades.Add(new Grade(GenerateId<Grade>(_appData.Grades), course.Id, student.Id, gradeValue, observation));
+
+                    Console.Write($"Confirme la saisie d'une note pour l'étudiant {student.Name} : {course.Name} {gradeValue} {observation}. Confirmer O pour Oui et N pour Non : ");
+                    string reponse = Console.ReadLine();
+
+                    if (reponse.Equals("O"))
+                    {
+                        // Ajout d'une nouvelle note dans la list de notes
+                        _appData.Grades.Add(new Grade(GenerateId<Grade>(_appData.Grades), course.Id, student.Id, gradeValue, observation));
+
+                        Console.WriteLine("Ajout de note confirmée");
+
+                        Log.Information($"Saisie d'une note pour l'étudiant {student.Name} : {course.Name} {gradeValue} {observation}");
+
+                        FileOperator.SaveData(_appData);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Saisie annulée");
+                        Log.Information($"Annulation de la saisie d'une note pour l'étudiant {student.Name} : {course.Name} {gradeValue} {observation}");
+                    }
                 }
                 else
                 {
                     Console.WriteLine(ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+                    Log.Information($"Échec de la saisie d'une note. {ConstantValue.NO_STUDENTS_LIST_DESCRIPTION}");
                 }
             }
             else
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_LIST_DESCRIPTION);
+                Log.Information($"Échec de la saisie d'une note. {ConstantValue.NO_COURSES_LIST_DESCRIPTION}");
             }
-
-            Console.WriteLine(ConstantValue.SEPARATION);
-        }
-
-        // Ajouter un nouveau cours au programme
-        public void AddCourse()
-        {
-            string name;
-
-            Console.WriteLine("Création d'un nouveau cours\n");
-            // Saisie de l'utilisateur
-            name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
-            // Ajout d'un nouveau cours dans la list de cours
-            _appData.Courses.Add(new Course(GenerateId<Course>(_appData.Courses), name));
 
             Console.WriteLine(ConstantValue.SEPARATION);
         }
@@ -204,16 +239,22 @@ namespace NationalEducation
                 {
                     _appData.Grades.RemoveAll(x => x.CourseId == course.Id);
                     _appData.Courses.Remove(course);
-                    Console.WriteLine("Suppression confirmé");
+                    Console.WriteLine("Suppression réussie");
+
+                    Log.Information($"Suppression du cours de {course.Name}");
+
+                    FileOperator.SaveData(_appData);
                 }
                 else
                 {
-                    Console.WriteLine("Suppression annulé");
+                    Console.WriteLine("Suppression annulée");
+                    Log.Information($"Annulation de la suppression du cours de {course.Name}");
                 }
             }
             else
             {
                 Console.WriteLine(ConstantValue.NO_COURSES_LIST_DESCRIPTION);
+                Log.Information($"Échec de la suppression de cours. {ConstantValue.NO_COURSES_LIST_DESCRIPTION}");
             }
 
             Console.WriteLine(ConstantValue.SEPARATION);

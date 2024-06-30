@@ -16,8 +16,12 @@
 
         public const string DATE_FORMAT = "dd/MM/yyyy";
         public const string DATE_ERROR_MESSAGE = "Vous devez respecter le format jj/mm/aaaa.\n";
+        public const string AGE_ERROR_MESSAGE = "Il est temps de retourner vers le futur.\n";
 
         public const float MAX_GRADE = 20.0f;
+        public const float MIN_GRADE = 0.0f;
+
+        public const float YEAR = 365.25f;
 
         // List
         // Student
@@ -33,13 +37,5 @@
         // Course
         public const string COURSE_SELECT_DESCRIPTION_ADDGRADE = "Entrez l'index du cours pour la note à entrer : ";
         public const string COURSE_SELECT_DESCRIPTION_DELETECOURSE = "Entrez l'index du cours à supprimer : ";
-
-        // Path
-        // public const string PROJECT_PATH = "C:\\Users\\antho\\source\\repos\\NationalEducation\\NationalEducation";
-        public const string PROJECT_PATH = "C:\\Users\\antho\\Source\\Repos\\abt-111\\NationalEducation\\NationalEducation";
-        public const string JSON_FILE_NAME = "save.JSON";
-        public const string LOG_FILE_NAME = "log.txt";
-        public const string JSON_FILE_PATH = $"{PROJECT_PATH}\\{JSON_FILE_NAME}";
-        public const string LOG_FILE_PATH = $"{PROJECT_PATH}\\{LOG_FILE_NAME}";
     }
 }
