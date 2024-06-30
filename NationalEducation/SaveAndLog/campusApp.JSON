@@ -60,6 +60,13 @@
       "StudentId": 1,
       "Value": 13.75,
       "Observation": "Peut mieux faire"
+    },
+    {
+      "Id": 4,
+      "CourseId": 0,
+      "StudentId": 0,
+      "Value": 12.0,
+      "Observation": ""
     }
   ]
 }

@@ -22,47 +22,32 @@ namespace NationalEducation
         }
 
         // Lister les éléments IListable
-        public void ListAll<T>(List<T> ListOfT, string listDescription) where T : IListable
-        {
-            Console.WriteLine($"{listDescription}\n");
-
-            int index = 0;
-            foreach (T t in ListOfT)
-            {
-                Console.WriteLine($"{index} - {t.Name}");
-                index++;
-            }
-        }
-        public void ListAllStudents()
+        public void ListAll<T>(List<T> ListOfT, string listDescription, string noListDescription) where T : IListable
         {
             if (_appData.Students.Count > 0)
             {
-                ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION);
+                Console.WriteLine($"{listDescription}\n");
+
+                int index = 0;
+                foreach (T t in ListOfT)
+                {
+                    Console.WriteLine($"{index} - {t.Name}");
+                    index++;
+                }
+
+                Log.Information($"Consultation de {listDescription}");
             }
             else
             {
-                Console.WriteLine(ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
-            }
+                Console.WriteLine(noListDescription);
 
-            Log.Information("Consultation de la liste des étudiants");
+                Log.Information($"Échec de la consultation. {noListDescription}");
+            }
 
             Console.WriteLine(ConstantValue.SEPARATION);
         }
-        public void ListAllCourses()
-        {
-            if (_appData.Courses.Count > 0)
-            {
-                ListAll<Course>(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION);
-            }
-            else
-            {
-                Console.WriteLine(ConstantValue.NO_COURSES_LIST_DESCRIPTION);
-            }
-
-            Log.Information("Consultation de la liste des cours");
-
-            Console.WriteLine(ConstantValue.SEPARATION);
-        }
+        public void ListAllStudents() => ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+        public void ListAllCourses() => ListAll<Course>(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION, ConstantValue.NO_COURSES_LIST_DESCRIPTION);
 
         public T Select<T>(List<T> ListOfT, string selectDescription)
         {
@@ -101,7 +86,7 @@ namespace NationalEducation
             if(_appData.Students.Count > 0)
             {
                 // Affichage de la liste des étudiants
-                ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION);
+                ListAllStudents();
                 // Selection d'un étudiant
                 Student student = Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
 
@@ -171,12 +156,12 @@ namespace NationalEducation
                 if (_appData.Students.Count > 0)
                 {
                     // Affichage de la liste des étudiants
-                    ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION);
+                    ListAllStudents();
                     // Selection d'un étudiant
                     Student student = Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_ADDGRADE);
 
                     // Affichage de la liste des cours
-                    ListAll<Course>(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION);
+                    ListAllCourses();
                     // Selection d'un cours
                     Course course = Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_ADDGRADE);
 
@@ -228,7 +213,7 @@ namespace NationalEducation
             if(_appData.Courses.Count > 0)
             {
                 // Affichage de la liste des cours
-                ListAll<Course>(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION);
+                ListAllCourses();
                 // Selection d'un cours
                 Course course = Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_DELETECOURSE);
 

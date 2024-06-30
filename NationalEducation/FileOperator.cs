@@ -13,8 +13,8 @@ namespace NationalEducation
         public static string jsonFilePath ="";
         public static string logFilePath = "";
         // Constantes
-        public const string JSON_FILE_NAME = "save.JSON";
-        public const string LOG_FILE_NAME = "log.txt";
+        public const string JSON_FILE_NAME = "SaveAndLog\\campusApp.JSON";
+        public const string LOG_FILE_NAME = "SaveAndLog\\campusApp.log";
 
         public static void GeneratePath()
         {
