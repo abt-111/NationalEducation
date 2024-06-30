@@ -49,6 +49,7 @@
             Console.WriteLine();
         }
 
+        // Student
         public static void DisplayStudentMenu()
         {
             Console.WriteLine("\nApplication révolutionnaire\n");
@@ -81,6 +82,7 @@
             }
         }
 
+        // Courses
         public static void DisplayCourseMenu()
         {
             Console.WriteLine("\nApplication révolutionnaire\n");

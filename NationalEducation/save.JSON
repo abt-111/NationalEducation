@@ -14,18 +14,21 @@
       "Id": 0,
       "LastName": "Bomber",
       "FirstName": "Jean",
+      "Name": "Bomber - Jean",
       "DateOfBirth": "1993-06-08T00:00:00"
     },
     {
       "Id": 1,
       "LastName": "Cherry",
       "FirstName": "Sandy",
+      "Name": "Cherry - Sandy",
       "DateOfBirth": "1990-10-21T00:00:00"
     },
     {
       "Id": 2,
       "LastName": "Temmel",
       "FirstName": "Anthony",
+      "Name": "Temmel - Anthony",
       "DateOfBirth": "1993-06-08T00:00:00"
     }
   ],

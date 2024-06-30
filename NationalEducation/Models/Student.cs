@@ -2,11 +2,18 @@
 
 namespace NationalEducation.Models
 {
-    internal class Student : IIdentifiable
+    internal class Student : IIdentifiable, IListable
     {
         public uint Id { get; }
         public string LastName { get; }
         public string FirstName { get; }
+        public string Name
+        {
+            get
+            {
+                return $"{LastName} - {FirstName}";
+            }
+        }
         public DateTime DateOfBirth { get; }
 
         public Student(uint id, string lastName, string firstName, DateTime dateOfBirth)

@@ -2,10 +2,12 @@
 {
     internal static class ConstantValue
     {
+        // Display
         public const string INDENT_VALUE = "{0, -19} : {1}";
         public const string TABULATION = "    ";
         public const string SEPARATION = "----------------------------------------------------------------------";
 
+        // InputValidator
         public const string NAME_PATTERN = "^([A-Z]|[a-z])[a-z]{2,}(-([A-Z]|[a-z])[a-z]{2,})?$";
         public const string NAME_ERROR_MESSAGE = "Vous êtes limité à l'alphabet et au caractère spécial « - ».\n";
 
@@ -17,9 +19,22 @@
 
         public const float MAX_GRADE = 20.0f;
 
-        public const string NO_STUDENTS_ERROR_MESSAGE = "Il n'y a pas d'étudiant pour le moment.\n";
-        public const string NO_COURSES_ERROR_MESSAGE = "Il n'y a pas de cours pour le moment.\n";
+        // List
+        // Student
+        public const string STUDENTS_LIST_DESCRIPTION = "Liste des étudiants";
+        public const string NO_STUDENTS_LIST_DESCRIPTION = "Il n'y a pas d'étudiant pour le moment";
+        // Course
+        public const string COURSES_LIST_DESCRIPTION = "Liste des cours";
+        public const string NO_COURSES_LIST_DESCRIPTION = "Il n'y a pas de cours pour le moment";
+        // Select
+        // Student
+        public const string STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT = "Entrez l'index de l'étudiant à afficher : ";
+        public const string STUDENT_SELECT_DESCRIPTION_ADDGRADE = "Entrez l'index de l'étudiant pour la note à entrer : ";
+        // Course
+        public const string COURSE_SELECT_DESCRIPTION_ADDGRADE = "Entrez l'index du cours pour la note à entrer : ";
+        public const string COURSE_SELECT_DESCRIPTION_DELETECOURSE = "Entrez l'index du cours à supprimer : ";
 
+        // Path
         // public const string PROJECT_PATH = "C:\\Users\\antho\\source\\repos\\NationalEducation\\NationalEducation";
         public const string PROJECT_PATH = "C:\\Users\\antho\\Source\\Repos\\abt-111\\NationalEducation\\NationalEducation";
         public const string JSON_FILE_NAME = "save.JSON";
