@@ -6,6 +6,28 @@ namespace NationalEducation
 {
     internal static class InputValidator
     {
+        // Début de refactorisation des méthodes dans InputValidator
+        public static bool TryValidIndexInput(string userInput, string indicationForUser, int maxIndex, out int index)
+        {
+            if (Int32.TryParse(userInput, out index))
+            {
+                if (index >= 0 && index < maxIndex)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Vous devez entrer un entier compris entre 0 et {maxIndex - 1}.\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Vous devez entrer un entier compris entre 0 et {maxIndex - 1}.\n");
+            }
+
+            return false;
+        }
+
         public static int GetAndValidIndexInput(string indicationForUser, int maxIndex)
         {
             bool isValid = false;
