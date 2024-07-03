@@ -30,6 +30,9 @@
         // Course
         public const string COURSES_LIST_DESCRIPTION = "Liste des cours";
         public const string NO_COURSES_LIST_DESCRIPTION = "Il n'y a pas de cours pour le moment";
+        // Promotion
+        public const string PROMOTIONS_LIST_DESCRIPTION = "Liste des promotions";
+        public const string NO_PROMOTIONS_LIST_DESCRIPTION = "Il n'y a pas de promotions pour le moment";
         // Select
         // Student
         public const string STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT = "Entrez l'index de l'étudiant à afficher : ";

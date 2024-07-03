@@ -268,5 +268,41 @@ namespace NationalEducation
             else
                 return (ListOfT.Last().Id + 1);
         }
+
+        // Promotion
+        public List<string> GetPromotions()
+        {
+            List<string> promotions = new List<string>();
+
+            foreach (Student student in _appData.Students)
+            {
+                if (!promotions.Contains(student.Promotion))
+                {
+                    promotions.Add(student.Promotion);
+                }
+            }
+
+            return promotions;
+        }
+
+        public void ListAllPromotions(List<string> promotions)
+        {
+            if (promotions.Count > 0)
+            {
+                int index = 0;
+
+                Console.WriteLine($"{ConstantValue.PROMOTIONS_LIST_DESCRIPTION}\n");
+
+                foreach (string promotion in promotions)
+                {
+                    Console.WriteLine($"{index} - {promotion}");
+                    index++;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{ConstantValue.NO_PROMOTIONS_LIST_DESCRIPTION}\n");
+            }
+        }
     }
 }
