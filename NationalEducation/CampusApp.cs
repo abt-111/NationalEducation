@@ -270,6 +270,7 @@ namespace NationalEducation
         }
 
         // Promotion
+        // Récupérer la liste des promotions
         public List<string> GetPromotions()
         {
             List<string> promotions = new List<string>();
@@ -285,6 +286,7 @@ namespace NationalEducation
             return promotions;
         }
 
+        // Afficher la liste des promotions
         public void ListAllPromotions(List<string> promotions)
         {
             if (promotions.Count > 0)

@@ -43,6 +43,18 @@ namespace NationalEducation
 
                     Log.Information("Retour au menu principal");
                 }
+                else if (userInput == "2")
+                {
+                    while(userInput != "exit" && !userInput.Equals("4"))
+                    {
+                        DisplayPromotionMenu();
+
+                        Console.Write("Entrées : ");
+                        userInput = Console.ReadLine();
+
+                        ChoosePromotionMenuOption(userInput, campusApp);
+                    }
+                }
             }
             while (userInput != "exit");
         }
@@ -52,6 +64,7 @@ namespace NationalEducation
             Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Etudiants");
             Console.WriteLine("1 : Cours");
+            Console.WriteLine("2 : Promotions");
             Console.WriteLine();
 
             Log.Information("Affichage du menu general");
@@ -117,6 +130,28 @@ namespace NationalEducation
                     break;
                 case "2":
                     campusApp.DeleteCourse();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static void DisplayPromotionMenu()
+        {
+            Console.WriteLine("National Education Application\n");
+            Console.WriteLine("0 : Lister les promotions");
+            Console.WriteLine("1 : Lister les élèves d'une promotion");
+            Console.WriteLine("2 : Afficher la moyenne par cours de tous les élèves d'une promotion donnée");
+            Console.WriteLine("3 : Revenir au menu principal");
+            Console.WriteLine();
+        }
+
+        public static void ChoosePromotionMenuOption(string userInput, CampusApp campusApp)
+        {
+            switch (userInput)
+            {
+                case "0":
+                    campusApp.ListAllPromotions(campusApp.GetPromotions());
                     break;
                 default:
                     break;
