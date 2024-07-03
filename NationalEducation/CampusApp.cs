@@ -64,14 +64,16 @@ namespace NationalEducation
             string lastName;
             string firstName;
             DateTime dateOfBirth;
+            string promotion;
 
             Console.WriteLine("Création d'un nouvel étudiant\n");
             // Saisie de l'utilisateur
             lastName = InputValidator.GetAndValidNameInput("Entrez un nom : ");
             firstName = InputValidator.GetAndValidNameInput("Entrez un prénom : ");
             dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
+            promotion = InputValidator.GetAndValidNameInput("Entrez un nom de promotion : ");
             // Ajout d'un nouvel étudiant dans la liste d'étudiants
-            _appData.Students.Add(new Student(GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth));
+            _appData.Students.Add(new Student(GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth, promotion));
 
             Log.Information($"Ajout de l'étudiant {lastName} {firstName}");
 

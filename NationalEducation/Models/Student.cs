@@ -16,21 +16,15 @@ namespace NationalEducation.Models
         }
         public DateTime DateOfBirth { get; private set; }
 
-        public Student(uint id, string lastName, string firstName, DateTime dateOfBirth)
+        public string Promotion { get; private set; }
+
+        public Student(uint id, string lastName, string firstName, DateTime dateOfBirth, string promotion)
         {
             this.Id = id;
             LastName = lastName;
             FirstName = firstName;
             DateOfBirth = dateOfBirth;
-        }
-
-        public void Fill()
-        {
-            Console.WriteLine("Création d'un nouvel étudiant\n");
-            // Saisie de l'utilisateur
-            LastName = InputValidator.GetAndValidNameInput("Entrez un nom : ");
-            FirstName = InputValidator.GetAndValidNameInput("Entrez un prénom : ");
-            DateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
+            Promotion = promotion;
         }
 
         // Obtenir la liste des notes de l'étudiant

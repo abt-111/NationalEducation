@@ -5,68 +5,87 @@
       "Name": "Mathematique"
     },
     {
-      "Id": 2,
+      "Id": 1,
+      "Name": "Francais"
+    },
+    {
+      "Id": 3,
       "Name": "Informatique"
     }
   ],
   "Students": [
     {
       "Id": 0,
-      "LastName": "Bomber",
-      "FirstName": "Jean",
-      "Name": "Bomber - Jean",
-      "DateOfBirth": "1993-06-08T00:00:00"
+      "LastName": "Dupont",
+      "FirstName": "Marie",
+      "Name": "Dupont - Marie",
+      "DateOfBirth": "2000-02-15T00:00:00",
+      "Promotion": "Seconde"
     },
     {
       "Id": 1,
-      "LastName": "Cherry",
-      "FirstName": "Sandy",
-      "Name": "Cherry - Sandy",
-      "DateOfBirth": "1990-10-21T00:00:00"
+      "LastName": "Martin",
+      "FirstName": "Lucas",
+      "Name": "Martin - Lucas",
+      "DateOfBirth": "2000-07-21T00:00:00",
+      "Promotion": "Seconde"
     },
     {
       "Id": 2,
-      "LastName": "Temmel",
-      "FirstName": "Anthony",
-      "Name": "Temmel - Anthony",
-      "DateOfBirth": "1993-06-08T00:00:00"
-    }
-  ],
-  "Grades": [
-    {
-      "Id": 0,
-      "CourseId": 0,
-      "StudentId": 0,
-      "Value": 12.0,
-      "Observation": "Moyen"
-    },
-    {
-      "Id": 1,
-      "CourseId": 2,
-      "StudentId": 0,
-      "Value": 18.0,
-      "Observation": "Tres bien"
-    },
-    {
-      "Id": 2,
-      "CourseId": 0,
-      "StudentId": 1,
-      "Value": 14.5,
-      "Observation": "Manque de concentration"
+      "LastName": "Durand",
+      "FirstName": "Emma",
+      "Name": "Durand - Emma",
+      "DateOfBirth": "2000-05-03T00:00:00",
+      "Promotion": "Seconde"
     },
     {
       "Id": 3,
-      "CourseId": 2,
-      "StudentId": 1,
-      "Value": 13.75,
-      "Observation": "Peut mieux faire"
+      "LastName": "Leroy",
+      "FirstName": "Hugo",
+      "Name": "Leroy - Hugo",
+      "DateOfBirth": "1999-11-12T00:00:00",
+      "Promotion": "Premiere"
     },
     {
       "Id": 4,
-      "CourseId": 0,
-      "StudentId": 0,
-      "Value": 12.0,
-      "Observation": ""
+      "LastName": "Moreau",
+      "FirstName": "Chloe",
+      "Name": "Moreau - Chloe",
+      "DateOfBirth": "1999-09-28T00:00:00",
+      "Promotion": "Premiere"
+    },
+    {
+      "Id": 5,
+      "LastName": "Fournier",
+      "FirstName": "Louis",
+      "Name": "Fournier - Louis",
+      "DateOfBirth": "1999-01-30T00:00:00",
+      "Promotion": "Premiere"
+    },
+    {
+      "Id": 6,
+      "LastName": "Girard",
+      "FirstName": "Lea",
+      "Name": "Girard - Lea",
+      "DateOfBirth": "1998-03-17T00:00:00",
+      "Promotion": "Terminale"
+    },
+    {
+      "Id": 7,
+      "LastName": "Lambert",
+      "FirstName": "Jules",
+      "Name": "Lambert - Jules",
+      "DateOfBirth": "1998-06-08T00:00:00",
+      "Promotion": "Terminale"
+    },
+    {
+      "Id": 8,
+      "LastName": "Rousseau",
+      "FirstName": "Manon",
+      "Name": "Rousseau - Manon",
+      "DateOfBirth": "2000-10-25T00:00:00",
+      "Promotion": "Terminale"
     }
-  ]
+  ],
+  "Grades": []
 }
