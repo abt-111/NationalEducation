@@ -4,11 +4,6 @@ namespace NationalEducation
 {
     internal static class MenuApp
     {
-        public static void LaunchMenuApp(CampusApp campusApp)
-        {
-            GeneralMenuLoop(campusApp);
-        }
-
         // General
         public static void GeneralMenuLoop(CampusApp campusApp)
         {
@@ -34,15 +29,17 @@ namespace NationalEducation
                     PromotionMenuLoop(userInput, campusApp);
                 }
             }
-            while (userInput != "exit");
+            while (userInput != "-1");
         }
 
         public static void DisplayGeneralMenu()
         {
+            Console.Clear();
             Console.WriteLine("National Education Application\n");
-            Console.WriteLine("0 : Etudiants");
-            Console.WriteLine("1 : Cours");
-            Console.WriteLine("2 : Promotions");
+            Console.WriteLine("-1 : Quitter");
+            Console.WriteLine(" 0 : Etudiants");
+            Console.WriteLine(" 1 : Cours");
+            Console.WriteLine(" 2 : Promotions");
             Console.WriteLine();
 
             Log.Information("Affichage du menu general");
@@ -51,7 +48,7 @@ namespace NationalEducation
         // Student
         public static void StudentMenuLoop(string userInput, CampusApp campusApp)
         {
-            while (userInput != "exit" && userInput != "4")
+            while (userInput != "-1" && userInput != "4")
             {
                 DisplayStudentMenu();
 
@@ -66,6 +63,7 @@ namespace NationalEducation
 
         public static void DisplayStudentMenu()
         {
+            Console.Clear();
             Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Lister les étudiants");
             Console.WriteLine("1 : Créer un nouvel étudiants");
@@ -82,16 +80,24 @@ namespace NationalEducation
             switch (userInput)
             {
                 case "0":
-                    campusApp.ListAllStudents();
+                    Console.Clear();
+                    campusApp.StudentOperator.ListAllStudents();
+                    AskForKeyPress();
                     break;
                 case "1":
-                    campusApp.AddStudent();
+                    Console.Clear();
+                    campusApp.StudentOperator.AddStudent();
+                    AskForKeyPress();
                     break;
                 case "2":
-                    campusApp.DisplayStudent();
+                    Console.Clear();
+                    campusApp.StudentOperator.DisplayStudent();
+                    AskForKeyPress();
                     break;
                 case "3":
+                    Console.Clear();
                     campusApp.AddGradeToStudent();
+                    AskForKeyPress();
                     break;
                 default:
                     break;
@@ -101,7 +107,7 @@ namespace NationalEducation
         // Courses
         public static void CourseMenuLoop(string userInput, CampusApp campusApp)
         {
-            while (userInput != "exit" && userInput != "3")
+            while (userInput != "-1" && userInput != "3")
             {
                 DisplayCourseMenu();
 
@@ -116,6 +122,7 @@ namespace NationalEducation
 
         public static void DisplayCourseMenu()
         {
+            Console.Clear();
             Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Lister les cours existants");
             Console.WriteLine("1 : Ajouter un nouveau cours au programme");
@@ -131,13 +138,19 @@ namespace NationalEducation
             switch (userInput)
             {
                 case "0":
-                    campusApp.ListAllCourses(campusApp.GetPromotions());
+                    Console.Clear();
+                    campusApp.ListAllCourses(campusApp.PromotionOperator.GetPromotions());
+                    AskForKeyPress();
                     break;
                 case "1":
-                    campusApp.AddCourse();
+                    Console.Clear();
+                    campusApp.CourseOperator.AddCourse();
+                    AskForKeyPress();
                     break;
                 case "2":
-                    campusApp.DeleteCourse();
+                    Console.Clear();
+                    campusApp.CourseOperator.DeleteCourse();
+                    AskForKeyPress();
                     break;
                 default:
                     break;
@@ -147,7 +160,7 @@ namespace NationalEducation
         // Promotions
         public static void PromotionMenuLoop(string userInput, CampusApp campusApp)
         {
-            while (userInput != "exit" && !userInput.Equals("3"))
+            while (userInput != "-1" && !userInput.Equals("3"))
             {
                 DisplayPromotionMenu();
 
@@ -162,6 +175,7 @@ namespace NationalEducation
 
         public static void DisplayPromotionMenu()
         {
+            Console.Clear();
             Console.WriteLine("National Education Application\n");
             Console.WriteLine("0 : Lister les promotions");
             Console.WriteLine("1 : Lister les élèves d'une promotion");
@@ -175,17 +189,29 @@ namespace NationalEducation
             switch (userInput)
             {
                 case "0":
-                    campusApp.ListAllPromotions(campusApp.GetPromotions());
+                    Console.Clear();
+                    campusApp.PromotionOperator.ListAllPromotions(campusApp.PromotionOperator.GetPromotions());
+                    AskForKeyPress();
                     break;
                 case "1":
-                    campusApp.ListAllStudentsOfPromotion();
+                    Console.Clear();
+                    campusApp.PromotionOperator.ListAllStudentsOfPromotion();
+                    AskForKeyPress();
                     break;
                 case "2":
-                    campusApp.ListAllAverageOfCoursesOfPromotion();
+                    Console.Clear();
+                    campusApp.PromotionOperator.ListAllAverageOfCoursesOfPromotion();
+                    AskForKeyPress();
                     break;
                 default:
                     break;
             }
+        }
+
+        public static void AskForKeyPress()
+        {
+            Console.Write("Appuyer sur une touche pour continuer");
+            Console.ReadKey();
         }
     }
 }

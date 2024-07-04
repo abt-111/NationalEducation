@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NationalEducation
+namespace NationalEducation.Operators
 {
     internal static class GenericOperator
     {
@@ -50,7 +50,7 @@ namespace NationalEducation
             if (ListOfT.Count == 0)
                 return 0;
             else
-                return (ListOfT.Last().Id + 1);
+                return ListOfT.Last().Id + 1;
         }
     }
 }

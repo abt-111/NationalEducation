@@ -4,13 +4,13 @@ using Serilog;
 using Serilog.Events;
 using System.IO;
 
-namespace NationalEducation
+namespace NationalEducation.Operators
 {
     internal static class FileOperator
     {
         // Variables
         public static string projectPath = "";
-        public static string jsonFilePath ="";
+        public static string jsonFilePath = "";
         public static string logFilePath = "";
         // Constantes
         public const string JSON_FILE_NAME = "SaveAndLog\\campusApp.JSON";
@@ -24,7 +24,7 @@ namespace NationalEducation
             logFilePath = $"{projectPath}\\{LOG_FILE_NAME}";
         }
 
-        public static void SaveData(AppData appData)
+        public static void SaveData(DataApp appData)
         {
             // Convertion de l'instance de AppData en chaîne de caractères formatée pour
             // l'enregistrement dans un fichier JSON
@@ -34,19 +34,19 @@ namespace NationalEducation
             File.WriteAllText(jsonFilePath, jsonString);
         }
 
-        public static void LoadData(out AppData appData)
+        public static void LoadData(out DataApp appData)
         {
-            if(File.Exists(jsonFilePath))
+            if (File.Exists(jsonFilePath))
             {
                 // Lecture du contenue du fichier JSON et affection dans une chaîne de caractères
                 string jsonString = File.ReadAllText(jsonFilePath);
 
                 // Convertion de la chaîne de caractères en une instance de AppData
-                appData = JsonConvert.DeserializeObject<AppData>(jsonString);
+                appData = JsonConvert.DeserializeObject<DataApp>(jsonString);
             }
             else
             {
-                appData = new AppData(new List<Student>(), new List<Course>(), new List<Grade>());
+                appData = new DataApp(new List<Student>(), new List<Course>(), new List<Grade>());
             }
         }
 

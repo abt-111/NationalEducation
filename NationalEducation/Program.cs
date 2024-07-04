@@ -1,4 +1,6 @@
-﻿namespace NationalEducation
+﻿using NationalEducation.Operators;
+
+namespace NationalEducation
 {
     internal class Program
     {
@@ -8,11 +10,11 @@
 
             FileOperator.LogTest();
 
-            FileOperator.LoadData(out AppData appData);
+            FileOperator.LoadData(out DataApp appData);
 
             CampusApp campusApp = new CampusApp(appData);
 
-            MenuApp.LaunchMenuApp(campusApp);
+            campusApp.LaunchApp();
 
             FileOperator.SaveData(appData);
         }

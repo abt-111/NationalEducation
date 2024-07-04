@@ -6,19 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NationalEducation
+namespace NationalEducation.Operators
 {
     internal class StudentOperator
     {
-        private AppData _appData;
+        private DataApp _appData;
 
-        public StudentOperator(AppData appData)
+        public StudentOperator(DataApp appData)
         {
             _appData = appData;
         }
 
         // Afficher la liste de tout les étudiants
-        public void ListAllStudents() => GenericOperator.ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+        public void ListAllStudents() => GenericOperator.ListAll(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
 
         // Créer un nouvel étudiant
         public void AddStudent()
@@ -35,7 +35,7 @@ namespace NationalEducation
             dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
             promotion = InputValidator.GetAndValidNameInput("Entrez un nom de promotion : ");
             // Ajout d'un nouvel étudiant dans la liste d'étudiants
-            _appData.Students.Add(new Student(GenericOperator.GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth, promotion));
+            _appData.Students.Add(new Student(GenericOperator.GenerateId(_appData.Students), lastName, firstName, dateOfBirth, promotion));
 
             Log.Information($"Ajout de l'étudiant {lastName} {firstName}");
 
@@ -52,7 +52,7 @@ namespace NationalEducation
                 // Affichage de la liste des étudiants
                 ListAllStudents();
                 // Selection d'un étudiant
-                Student student = GenericOperator.Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
+                Student student = GenericOperator.Select(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
 
                 List<Grade> gradesOfStudent = student.GetGradesOfStudent(_appData.Grades);
 

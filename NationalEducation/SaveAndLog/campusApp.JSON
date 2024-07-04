@@ -85,6 +85,14 @@
       "Name": "Rousseau - Manon",
       "DateOfBirth": "2000-10-25T00:00:00",
       "Promotion": "Terminale"
+    },
+    {
+      "Id": 9,
+      "LastName": "sdfsdfds",
+      "FirstName": "sdfsdfsd",
+      "Name": "sdfsdfds - sdfsdfsd",
+      "DateOfBirth": "2005-12-12T00:00:00",
+      "Promotion": "sdfsdfsdf"
     }
   ],
   "Grades": [

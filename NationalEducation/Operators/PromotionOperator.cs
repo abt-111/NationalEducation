@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NationalEducation
+namespace NationalEducation.Operators
 {
     internal class PromotionOperator
     {
-        private AppData _appData;
+        private DataApp _appData;
 
-        public PromotionOperator(AppData appData)
+        public PromotionOperator(DataApp appData)
         {
             _appData = appData;
         }
@@ -66,13 +66,11 @@ namespace NationalEducation
         {
             ListAllPromotions(GetPromotions());
 
-            String promotion = GenericOperator.Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+            string promotion = GenericOperator.Select(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
 
             List<Student> students = GetAllStudentsOfPromotions(promotion);
 
-            GenericOperator.ListAll<Student>(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
-
-            Console.WriteLine(ConstantValue.SEPARATION);
+            GenericOperator.ListAll(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
         }
 
         // Afficher la liste des moyennes par cours d'une promotion donnée
@@ -80,7 +78,7 @@ namespace NationalEducation
         {
             ListAllPromotions(GetPromotions());
 
-            String promotion = GenericOperator.Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+            string promotion = GenericOperator.Select(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
 
             List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
 
@@ -113,7 +111,7 @@ namespace NationalEducation
 
             if (counter != 0)
             {
-                moyenne = Math.Round((sum / counter), 1);
+                moyenne = Math.Round(sum / counter, 1);
 
                 return $"{moyenne}";
             }
