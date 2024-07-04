@@ -8,6 +8,7 @@ using NationalEducation.Models;
 using NationalEducation.Interfaces;
 using System.Reflection;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace NationalEducation
 {
@@ -323,6 +324,7 @@ namespace NationalEducation
             Console.WriteLine(ConstantValue.SEPARATION);
         }
 
+        // Afficher la liste des moyennes par cours d'une promotion donnée
         public void ListAllAverageOfCoursesOfPromotion()
         {
             ListAllPromotions(GetPromotions());
@@ -333,35 +335,41 @@ namespace NationalEducation
 
             foreach (Course course in _appData.Courses)
             {
-                float sum = 0;
-                int counter = 0;
-                float moyenne = 0;
-
-                foreach (Student student in students)
-                {
-                    foreach (Grade grade in student.GetGradesOfStudent(_appData.Grades))
-                    {
-                        if(grade.CourseId ==  course.Id)
-                        {
-                            sum += grade.Value;
-                            counter++;
-                        }
-                    }
-                }
-
-                if (counter != 0)
-                {
-                    moyenne = sum / counter;
-
-                    Console.WriteLine($"{course.Name} - {moyenne}");
-                }
-                else
-                {
-                    Console.WriteLine($"{course.Name} - Pas de moyenne pour le moment");
-                }
+                Console.WriteLine($"{course.Name} - {GetAverageOfCourseOfPromotion(students, course)}");
             }
 
             Console.WriteLine(ConstantValue.SEPARATION);
+        }
+
+        // Récupérer la moyenne d'un cours pour une promotion donnée
+        public string GetAverageOfCourseOfPromotion(List<Student> students, Course course)
+        {
+            float sum = 0;
+            int counter = 0;
+            float moyenne = 0;
+
+            foreach (Student student in students)
+            {
+                foreach (Grade grade in student.GetGradesOfStudent(_appData.Grades))
+                {
+                    if (grade.CourseId == course.Id)
+                    {
+                        sum += grade.Value;
+                        counter++;
+                    }
+                }
+            }
+
+            if (counter != 0)
+            {
+                moyenne = sum / counter;
+
+                return $"{moyenne}";
+            }
+            else
+            {
+                return $"Pas de moyenne pour cette promotion le moment";
+            }
         }
     }
 }
