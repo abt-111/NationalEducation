@@ -87,5 +87,195 @@
       "Promotion": "Terminale"
     }
   ],
-  "Grades": []
+  "Grades": [
+    {
+      "Id": 0,
+      "CourseId": 0,
+      "StudentId": 0,
+      "Value": 18.0,
+      "Observation": "Excellent travail, très bonne compréhension des concepts"
+    },
+    {
+      "Id": 1,
+      "CourseId": 1,
+      "StudentId": 0,
+      "Value": 15.0,
+      "Observation": "Bon niveau, mais pourrait améliorer la rédaction"
+    },
+    {
+      "Id": 2,
+      "CourseId": 3,
+      "StudentId": 0,
+      "Value": 19.0,
+      "Observation": "Excellente maîtrise des outils et des langages de programmation"
+    },
+    {
+      "Id": 3,
+      "CourseId": 0,
+      "StudentId": 1,
+      "Value": 14.0,
+      "Observation": "Bonne compréhension, quelques erreurs de calcul"
+    },
+    {
+      "Id": 4,
+      "CourseId": 1,
+      "StudentId": 1,
+      "Value": 16.0,
+      "Observation": "Très bon travail, rédaction claire et précise"
+    },
+    {
+      "Id": 5,
+      "CourseId": 3,
+      "StudentId": 1,
+      "Value": 17.0,
+      "Observation": "Très bon niveau, bonne logique de programmation"
+    },
+    {
+      "Id": 6,
+      "CourseId": 0,
+      "StudentId": 2,
+      "Value": 12.0,
+      "Observation": "Des difficultés avec certains concepts, besoin de révisions supplémentaires"
+    },
+    {
+      "Id": 7,
+      "CourseId": 1,
+      "StudentId": 2,
+      "Value": 13.0,
+      "Observation": "Doit améliorer la structure des textes"
+    },
+    {
+      "Id": 8,
+      "CourseId": 3,
+      "StudentId": 2,
+      "Value": 14.0,
+      "Observation": "Bonnes compétences de base, mais peut mieux faire"
+    },
+    {
+      "Id": 9,
+      "CourseId": 0,
+      "StudentId": 3,
+      "Value": 16.0,
+      "Observation": "Très bon travail, continuez ainsi"
+    },
+    {
+      "Id": 10,
+      "CourseId": 1,
+      "StudentId": 3,
+      "Value": 14.0,
+      "Observation": "Bonne compréhension, quelques fautes d'orthographe"
+    },
+    {
+      "Id": 11,
+      "CourseId": 3,
+      "StudentId": 3,
+      "Value": 18.0,
+      "Observation": "Excellent, très bonne utilisation des ressources informatiques"
+    },
+    {
+      "Id": 12,
+      "CourseId": 0,
+      "StudentId": 4,
+      "Value": 10.0,
+      "Observation": "Besoin de travailler davantage les fondamentaux"
+    },
+    {
+      "Id": 13,
+      "CourseId": 1,
+      "StudentId": 4,
+      "Value": 11.0,
+      "Observation": "Des efforts à fournir en grammaire et orthographe"
+    },
+    {
+      "Id": 14,
+      "CourseId": 3,
+      "StudentId": 4,
+      "Value": 13.0,
+      "Observation": "Connaissances de base présentes, mais besoin de pratique"
+    },
+    {
+      "Id": 15,
+      "CourseId": 0,
+      "StudentId": 5,
+      "Value": 17.0,
+      "Observation": "Très bonne maîtrise des concepts mathématiques"
+    },
+    {
+      "Id": 16,
+      "CourseId": 1,
+      "StudentId": 5,
+      "Value": 18.0,
+      "Observation": "Excellent niveau, très bonne expression écrite"
+    },
+    {
+      "Id": 17,
+      "CourseId": 3,
+      "StudentId": 5,
+      "Value": 20.0,
+      "Observation": "Parfait, maîtrise totale des sujets abordés"
+    },
+    {
+      "Id": 18,
+      "CourseId": 0,
+      "StudentId": 6,
+      "Value": 15.0,
+      "Observation": "Bon travail, quelques petites erreurs à corriger"
+    },
+    {
+      "Id": 19,
+      "CourseId": 1,
+      "StudentId": 6,
+      "Value": 13.0,
+      "Observation": "Doit travailler la cohérence des idées"
+    },
+    {
+      "Id": 20,
+      "CourseId": 3,
+      "StudentId": 6,
+      "Value": 16.0,
+      "Observation": "Bonnes compétences, peut approfondir davantage"
+    },
+    {
+      "Id": 21,
+      "CourseId": 0,
+      "StudentId": 7,
+      "Value": 11.0,
+      "Observation": "Des lacunes à combler, besoin de révisions régulières"
+    },
+    {
+      "Id": 22,
+      "CourseId": 1,
+      "StudentId": 7,
+      "Value": 12.0,
+      "Observation": "Des progrès à faire en vocabulaire et syntaxe"
+    },
+    {
+      "Id": 23,
+      "CourseId": 3,
+      "StudentId": 7,
+      "Value": 15.0,
+      "Observation": "Bonnes bases, mais des erreurs de logique à corriger"
+    },
+    {
+      "Id": 24,
+      "CourseId": 0,
+      "StudentId": 8,
+      "Value": 19.0,
+      "Observation": "Excellentes compétences, très peu de fautes"
+    },
+    {
+      "Id": 25,
+      "CourseId": 1,
+      "StudentId": 8,
+      "Value": 17.0,
+      "Observation": "Très bon niveau, style agréable à lire"
+    },
+    {
+      "Id": 26,
+      "CourseId": 3,
+      "StudentId": 8,
+      "Value": 19.0,
+      "Observation": "Excellente compréhension et application des concepts"
+    }
+  ]
 }

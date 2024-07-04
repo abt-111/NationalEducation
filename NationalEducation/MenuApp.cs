@@ -45,7 +45,7 @@ namespace NationalEducation
                 }
                 else if (userInput == "2")
                 {
-                    while(userInput != "exit" && !userInput.Equals("4"))
+                    while(userInput != "exit" && !userInput.Equals("3"))
                     {
                         DisplayPromotionMenu();
 
@@ -155,6 +155,9 @@ namespace NationalEducation
                     break;
                 case "1":
                     campusApp.ListAllStudentsOfPromotion();
+                    break;
+                case "2":
+                    campusApp.ListAllAverageOfCoursesOfPromotion();
                     break;
                 default:
                     break;

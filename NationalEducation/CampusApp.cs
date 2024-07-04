@@ -305,6 +305,8 @@ namespace NationalEducation
             {
                 Console.WriteLine($"{ConstantValue.NO_PROMOTIONS_LIST_DESCRIPTION}\n");
             }
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
 
         // Afficher la liste des étudiants d'une promotions
@@ -317,6 +319,49 @@ namespace NationalEducation
             List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
 
             ListAll<Student>(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+
+            Console.WriteLine(ConstantValue.SEPARATION);
+        }
+
+        public void ListAllAverageOfCoursesOfPromotion()
+        {
+            ListAllPromotions(GetPromotions());
+
+            String promotion = Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+
+            List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
+
+            foreach (Course course in _appData.Courses)
+            {
+                float sum = 0;
+                int counter = 0;
+                float moyenne = 0;
+
+                foreach (Student student in students)
+                {
+                    foreach (Grade grade in student.GetGradesOfStudent(_appData.Grades))
+                    {
+                        if(grade.CourseId ==  course.Id)
+                        {
+                            sum += grade.Value;
+                            counter++;
+                        }
+                    }
+                }
+
+                if (counter != 0)
+                {
+                    moyenne = sum / counter;
+
+                    Console.WriteLine($"{course.Name} - {moyenne}");
+                }
+                else
+                {
+                    Console.WriteLine($"{course.Name} - Pas de moyenne pour le moment");
+                }
+            }
+
+            Console.WriteLine(ConstantValue.SEPARATION);
         }
     }
 }
