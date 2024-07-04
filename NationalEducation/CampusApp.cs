@@ -9,6 +9,7 @@ using NationalEducation.Interfaces;
 using System.Reflection;
 using System.Xml.Linq;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace NationalEducation
 {
@@ -21,42 +22,48 @@ namespace NationalEducation
         {
             _appData = appData;
         }
+        public void ListAllStudents() => GenericOperator.ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+        public void ListAllCourses() => GenericOperator.ListAll<Course>(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION, ConstantValue.NO_COURSES_LIST_DESCRIPTION);
 
-        // Lister les éléments IListable
-        public void ListAll<T>(List<T> ListOfT, string listDescription, string noListDescription) where T : IListable
+        public void ListAllCourses(List<string> promotions)
         {
-            if (_appData.Students.Count > 0)
+            if(promotions.Count > 0)
             {
-                Console.WriteLine($"{listDescription}\n");
-
-                int index = 0;
-                foreach (T t in ListOfT)
+                if (_appData.Courses.Count > 0)
                 {
-                    Console.WriteLine($"{index} - {t.Name}");
-                    index++;
-                }
+                    Console.WriteLine($"{ConstantValue.COURSES_LIST_DESCRIPTION}\n");
 
-                Log.Information($"Consultation de {listDescription}");
+                    int index = 0;
+                    foreach (Course course in _appData.Courses)
+                    {
+                        string temp = "";
+
+                        foreach (string promotion in promotions)
+                        {
+                            List<Student> students = GetAllStudentsOfPromotions(promotion);
+                            string average = GetAverageOfCourseOfPromotion(students, course);
+
+                            temp += $" - {promotion} : {average}";
+                        }
+                        Console.WriteLine($"{index} - {course.Name}{temp}");
+                        index++;
+                    }
+
+                    Log.Information($"Consultation de {ConstantValue.COURSES_LIST_DESCRIPTION}");
+                }
+                else
+                {
+                    Console.WriteLine(ConstantValue.NO_COURSES_LIST_DESCRIPTION);
+
+                    Log.Information($"Échec de la consultation. {ConstantValue.NO_COURSES_LIST_DESCRIPTION}");
+                }
             }
             else
             {
-                Console.WriteLine(noListDescription);
-
-                Log.Information($"Échec de la consultation. {noListDescription}");
+                ListAllCourses();
             }
 
             Console.WriteLine(ConstantValue.SEPARATION);
-        }
-        public void ListAllStudents() => ListAll<Student>(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
-        public void ListAllCourses() => ListAll<Course>(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION, ConstantValue.NO_COURSES_LIST_DESCRIPTION);
-
-        public T Select<T>(List<T> ListOfT, string selectDescription)
-        {
-            int index;
-
-            index = InputValidator.GetAndValidIndexInput(selectDescription, ListOfT.Count);
-
-            return ListOfT[index];
         }
 
         // Créer un nouvel étudiant
@@ -74,7 +81,7 @@ namespace NationalEducation
             dateOfBirth = InputValidator.GetAndValidDateInput("Entrez une date de naissance (format : jj/mm/aaaa) : ");
             promotion = InputValidator.GetAndValidNameInput("Entrez un nom de promotion : ");
             // Ajout d'un nouvel étudiant dans la liste d'étudiants
-            _appData.Students.Add(new Student(GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth, promotion));
+            _appData.Students.Add(new Student(GenericOperator.GenerateId<Student>(_appData.Students), lastName, firstName, dateOfBirth, promotion));
 
             Log.Information($"Ajout de l'étudiant {lastName} {firstName}");
 
@@ -91,7 +98,7 @@ namespace NationalEducation
                 // Affichage de la liste des étudiants
                 ListAllStudents();
                 // Selection d'un étudiant
-                Student student = Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
+                Student student = GenericOperator.Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
 
                 List<Grade> gradesOfStudent = student.GetGradesOfStudent(_appData.Grades);
 
@@ -128,24 +135,6 @@ namespace NationalEducation
             }
         }
 
-        // Ajouter un nouveau cours au programme
-        public void AddCourse()
-        {
-            string name;
-
-            Console.WriteLine("Création d'un nouveau cours\n");
-            // Saisie de l'utilisateur
-            name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
-            // Ajout d'un nouveau cours dans la list de cours
-            _appData.Courses.Add(new Course(GenerateId<Course>(_appData.Courses), name));
-
-            Log.Information($"Ajout du cours {name}");
-
-            FileOperator.SaveData(_appData);
-
-            Console.WriteLine(ConstantValue.SEPARATION);
-        }
-
         // Ajouter une note et une appréciation pour un cours sur un étudiant existant
         public void AddGradeToStudent()
         {
@@ -161,12 +150,12 @@ namespace NationalEducation
                     // Affichage de la liste des étudiants
                     ListAllStudents();
                     // Selection d'un étudiant
-                    Student student = Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_ADDGRADE);
+                    Student student = GenericOperator.Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_ADDGRADE);
 
                     // Affichage de la liste des cours
                     ListAllCourses();
                     // Selection d'un cours
-                    Course course = Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_ADDGRADE);
+                    Course course = GenericOperator.Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_ADDGRADE);
 
                     // Saisie de l'utilisateur
                     gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
@@ -178,7 +167,7 @@ namespace NationalEducation
                     if (reponse.Equals("O"))
                     {
                         // Ajout d'une nouvelle note dans la list de notes
-                        _appData.Grades.Add(new Grade(GenerateId<Grade>(_appData.Grades), course.Id, student.Id, gradeValue, observation));
+                        _appData.Grades.Add(new Grade(GenericOperator.GenerateId<Grade>(_appData.Grades), course.Id, student.Id, gradeValue, observation));
 
                         Console.WriteLine("Ajout de note confirmée");
 
@@ -207,6 +196,24 @@ namespace NationalEducation
             Console.WriteLine(ConstantValue.SEPARATION);
         }
 
+        // Ajouter un nouveau cours au programme
+        public void AddCourse()
+        {
+            string name;
+
+            Console.WriteLine("Création d'un nouveau cours\n");
+            // Saisie de l'utilisateur
+            name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
+            // Ajout d'un nouveau cours dans la list de cours
+            _appData.Courses.Add(new Course(GenericOperator.GenerateId<Course>(_appData.Courses), name));
+
+            Log.Information($"Ajout du cours {name}");
+
+            FileOperator.SaveData(_appData);
+
+            Console.WriteLine(ConstantValue.SEPARATION);
+        }
+
         // Supprimer un cours par son identifiant
         // Fonctions DeleteCourseById à créer
         public void DeleteCourse()
@@ -218,7 +225,7 @@ namespace NationalEducation
                 // Affichage de la liste des cours
                 ListAllCourses();
                 // Selection d'un cours
-                Course course = Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_DELETECOURSE);
+                Course course = GenericOperator.Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_DELETECOURSE);
 
                 Console.Write($"Vous allez supprimer le cours de {course.Name}. Confirmer O pour Oui et N pour Non : ");
                 reponse = Console.ReadLine();
@@ -262,14 +269,6 @@ namespace NationalEducation
             return string.Empty;
         }
 
-        public uint GenerateId<T>(List<T> ListOfT) where T : IIdentifiable
-        {
-            if(ListOfT.Count == 0)
-                return 0;
-            else
-                return (ListOfT.Last().Id + 1);
-        }
-
         // Promotion
         // Récupérer la liste des promotions
         public List<string> GetPromotions()
@@ -310,16 +309,22 @@ namespace NationalEducation
             Console.WriteLine(ConstantValue.SEPARATION);
         }
 
+        // Récupérer la liste des étudiants d'une promotions
+        public List<Student> GetAllStudentsOfPromotions(string promotion)
+        {
+            return _appData.Students.FindAll(x => x.Promotion == promotion);
+        }
+
         // Afficher la liste des étudiants d'une promotions
         public void ListAllStudentsOfPromotion()
         {
             ListAllPromotions(GetPromotions());
 
-            String promotion = Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+            String promotion = GenericOperator.Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
 
-            List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
+            List<Student> students = GetAllStudentsOfPromotions(promotion);
 
-            ListAll<Student>(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+            GenericOperator.ListAll<Student>(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
 
             Console.WriteLine(ConstantValue.SEPARATION);
         }
@@ -329,7 +334,7 @@ namespace NationalEducation
         {
             ListAllPromotions(GetPromotions());
 
-            String promotion = Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+            String promotion = GenericOperator.Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
 
             List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
 
@@ -346,7 +351,7 @@ namespace NationalEducation
         {
             float sum = 0;
             int counter = 0;
-            float moyenne = 0;
+            double moyenne = 0;
 
             foreach (Student student in students)
             {
@@ -362,7 +367,7 @@ namespace NationalEducation
 
             if (counter != 0)
             {
-                moyenne = sum / counter;
+                moyenne = Math.Round((sum / counter), 1);
 
                 return $"{moyenne}";
             }

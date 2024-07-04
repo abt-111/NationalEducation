@@ -123,7 +123,7 @@ namespace NationalEducation
             switch (userInput)
             {
                 case "0":
-                    campusApp.ListAllCourses();
+                    campusApp.ListAllCourses(campusApp.GetPromotions());
                     break;
                 case "1":
                     campusApp.AddCourse();
