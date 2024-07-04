@@ -306,5 +306,17 @@ namespace NationalEducation
                 Console.WriteLine($"{ConstantValue.NO_PROMOTIONS_LIST_DESCRIPTION}\n");
             }
         }
+
+        // Afficher la liste des étudiants d'une promotions
+        public void ListAllStudentsOfPromotion()
+        {
+            ListAllPromotions(GetPromotions());
+
+            String promotion = Select<string>(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+
+            List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
+
+            ListAll<Student>(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+        }
     }
 }

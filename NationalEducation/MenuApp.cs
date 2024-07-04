@@ -153,6 +153,9 @@ namespace NationalEducation
                 case "0":
                     campusApp.ListAllPromotions(campusApp.GetPromotions());
                     break;
+                case "1":
+                    campusApp.ListAllStudentsOfPromotion();
+                    break;
                 default:
                     break;
             }

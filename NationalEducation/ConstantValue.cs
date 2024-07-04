@@ -40,5 +40,7 @@
         // Course
         public const string COURSE_SELECT_DESCRIPTION_ADDGRADE = "Entrez l'index du cours pour la note à entrer : ";
         public const string COURSE_SELECT_DESCRIPTION_DELETECOURSE = "Entrez l'index du cours à supprimer : ";
+        // Promotion
+        public const string PROMOTION_SELECT_DESCRIPTION = "Entrez l'index de la promotion à afficher : ";
     }
 }
