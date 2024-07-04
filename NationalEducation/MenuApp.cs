@@ -6,6 +6,12 @@ namespace NationalEducation
     {
         public static void LaunchMenuApp(CampusApp campusApp)
         {
+            GeneralMenuLoop(campusApp);
+        }
+
+        // General
+        public static void GeneralMenuLoop(CampusApp campusApp)
+        {
             string userInput;
 
             do
@@ -17,43 +23,15 @@ namespace NationalEducation
 
                 if (userInput == "0")
                 {
-                    while (userInput != "exit" && userInput != "4")
-                    {
-                        DisplayStudentMenu();
-
-                        Console.Write("Entrées : ");
-                        userInput = Console.ReadLine();
-
-                        ChooseStudentMenu(userInput, campusApp);
-                    }
-
-                    Log.Information("Retour au menu principal");
+                    StudentMenuLoop(userInput, campusApp);
                 }
                 else if (userInput == "1")
                 {
-                    while (userInput != "exit" && userInput != "3")
-                    {
-                        DisplayCourseMenu();
-
-                        Console.Write("Entrées : ");
-                        userInput = Console.ReadLine();
-
-                        ChooseCourseMenuOption(userInput, campusApp);
-                    }
-
-                    Log.Information("Retour au menu principal");
+                    CourseMenuLoop(userInput, campusApp);
                 }
                 else if (userInput == "2")
                 {
-                    while(userInput != "exit" && !userInput.Equals("3"))
-                    {
-                        DisplayPromotionMenu();
-
-                        Console.Write("Entrées : ");
-                        userInput = Console.ReadLine();
-
-                        ChoosePromotionMenuOption(userInput, campusApp);
-                    }
+                    PromotionMenuLoop(userInput, campusApp);
                 }
             }
             while (userInput != "exit");
@@ -71,6 +49,21 @@ namespace NationalEducation
         }
 
         // Student
+        public static void StudentMenuLoop(string userInput, CampusApp campusApp)
+        {
+            while (userInput != "exit" && userInput != "4")
+            {
+                DisplayStudentMenu();
+
+                Console.Write("Entrées : ");
+                userInput = Console.ReadLine();
+
+                ChooseStudentMenu(userInput, campusApp);
+            }
+
+            Log.Information("Retour au menu principal");
+        }
+
         public static void DisplayStudentMenu()
         {
             Console.WriteLine("National Education Application\n");
@@ -106,6 +99,21 @@ namespace NationalEducation
         }
 
         // Courses
+        public static void CourseMenuLoop(string userInput, CampusApp campusApp)
+        {
+            while (userInput != "exit" && userInput != "3")
+            {
+                DisplayCourseMenu();
+
+                Console.Write("Entrées : ");
+                userInput = Console.ReadLine();
+
+                ChooseCourseMenuOption(userInput, campusApp);
+            }
+
+            Log.Information("Retour au menu principal");
+        }
+
         public static void DisplayCourseMenu()
         {
             Console.WriteLine("National Education Application\n");
@@ -134,6 +142,22 @@ namespace NationalEducation
                 default:
                     break;
             }
+        }
+
+        // Promotions
+        public static void PromotionMenuLoop(string userInput, CampusApp campusApp)
+        {
+            while (userInput != "exit" && !userInput.Equals("3"))
+            {
+                DisplayPromotionMenu();
+
+                Console.Write("Entrées : ");
+                userInput = Console.ReadLine();
+
+                ChoosePromotionMenuOption(userInput, campusApp);
+            }
+
+            Log.Information("Retour au menu principal");
         }
 
         public static void DisplayPromotionMenu()
