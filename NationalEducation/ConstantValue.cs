@@ -42,5 +42,6 @@
         public const string COURSE_SELECT_DESCRIPTION_DELETECOURSE = "Entrez l'index du cours à supprimer : ";
         // Promotion
         public const string PROMOTION_SELECT_DESCRIPTION = "Entrez l'index de la promotion à afficher : ";
+        public const string NO_AVERAGE_PROMOTION_DESCRIPTION = "Pas de moyenne pour cette promotion le moment";
     }
 }

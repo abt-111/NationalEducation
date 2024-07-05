@@ -20,13 +20,17 @@ namespace NationalEducation.Operators
             string name;
 
             Console.WriteLine("Création d'un nouveau cours\n");
+
             // Saisie de l'utilisateur
             name = InputValidator.GetAndValidNameInput("Entrez un nom pour le cour : ");
+
             // Ajout d'un nouveau cours dans la list de cours
             _appData.Courses.Add(new Course(GenericOperator.GenerateId(_appData.Courses), name));
 
+            // Ajout de l'action effectuée dans le fichier de log
             Log.Information($"Ajout du cours {name}");
 
+            // Sauvegarde des données après l'ajout du nouveau cours
             FileOperator.SaveData(_appData);
 
             Console.WriteLine(ConstantValue.SEPARATION);
@@ -36,7 +40,7 @@ namespace NationalEducation.Operators
         // Fonctions DeleteCourseById à créer
         public void DeleteCourse()
         {
-            string reponse = "";
+            string? userInput = "";
 
             if (_appData.Courses.Count > 0)
             {
@@ -46,11 +50,13 @@ namespace NationalEducation.Operators
                 Course course = GenericOperator.SelectItemOfList(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_DELETECOURSE);
 
                 Console.Write($"Vous allez supprimer le cours de {course.Name}. Confirmer O pour Oui et N pour Non : ");
-                reponse = Console.ReadLine();
+                userInput = Console.ReadLine();
 
-                if (reponse.Equals("O"))
+                userInput ??= "N";
+
+                if (userInput == "O")
                 {
-                    _appData.Grades.RemoveAll(x => x.CourseId == course.Id);
+                    _appData.Grades.RemoveAll(grade => grade.CourseId == course.Id);
                     _appData.Courses.Remove(course);
                     Console.WriteLine("Suppression réussie");
 

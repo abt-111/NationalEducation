@@ -1,10 +1,5 @@
 ﻿using NationalEducation.Interfaces;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NationalEducation.Operators
 {
@@ -40,7 +35,7 @@ namespace NationalEducation.Operators
         {
             int index;
 
-            index = InputValidator.GetAndValidIndexInput(selectDescription, ListOfT.Count);
+            index = InputValidator.GetAndValidIndex(selectDescription, ListOfT.Count);
 
             return ListOfT[index];
         }

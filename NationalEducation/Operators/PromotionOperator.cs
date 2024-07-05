@@ -102,7 +102,7 @@ namespace NationalEducation.Operators
             }
             else
             {
-                return $"Pas de moyenne pour cette promotion le moment";
+                return ConstantValue.NO_AVERAGE_PROMOTION_DESCRIPTION;
             }
         }
     }
