@@ -91,7 +91,7 @@ namespace NationalEducation
                     Course course = GenericOperator.SelectItemOfList<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_ADDGRADE);
 
                     // Saisie de l'utilisateur
-                    gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");
+                    gradeValue = InputValidator.GetAndValidGradeValue("Entrez la note : ");
                     observation = InputValidator.GetAndValidObservationInput("Entrez une appréciation : ");
 
                     Console.Write($"Confirme la saisie d'une note pour l'étudiant {student.Name} : {course.Name} {gradeValue} {observation}. Confirmer O pour Oui et N pour Non : ");
