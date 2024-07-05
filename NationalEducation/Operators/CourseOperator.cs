@@ -1,10 +1,5 @@
 ﻿using NationalEducation.Models;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NationalEducation.Operators
 {
@@ -17,7 +12,7 @@ namespace NationalEducation.Operators
             _appData = appData;
         }
 
-        public void ListAllCourses() => GenericOperator.ListAll(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION, ConstantValue.NO_COURSES_LIST_DESCRIPTION);
+        public void ListAllCourses() => GenericOperator.DisplayItemsOfList(_appData.Courses, ConstantValue.COURSES_LIST_DESCRIPTION, ConstantValue.NO_COURSES_LIST_DESCRIPTION);
 
         // Ajouter un nouveau cours au programme
         public void AddCourse()
@@ -48,7 +43,7 @@ namespace NationalEducation.Operators
                 // Affichage de la liste des cours
                 ListAllCourses();
                 // Selection d'un cours
-                Course course = GenericOperator.Select(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_DELETECOURSE);
+                Course course = GenericOperator.SelectItemOfList(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_DELETECOURSE);
 
                 Console.Write($"Vous allez supprimer le cours de {course.Name}. Confirmer O pour Oui et N pour Non : ");
                 reponse = Console.ReadLine();

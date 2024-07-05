@@ -1,22 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.Linq;
-using Serilog;
+﻿using Serilog;
 using NationalEducation.Models;
-using NationalEducation.Interfaces;
-using System.Reflection;
-using System.Xml.Linq;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using NationalEducation.Operators;
 
 namespace NationalEducation
 {
     internal class CampusApp
     {
-
         private DataApp _appData;
         public StudentOperator StudentOperator { get; }
         public CourseOperator CourseOperator { get; }
@@ -35,9 +24,12 @@ namespace NationalEducation
             MenuApp.GeneralMenuLoop(this);
         }
 
-        public void ListAllCourses(List<string> promotions)
+        // Afficher la liste des cours avec les moyennes par promotion pour chaque cours
+        public void DisplayCoursesWithAveragesByPromotion()
         {
-            if(promotions.Count > 0)
+            List<string> promotions = PromotionOperator.GetPromotions();
+
+            if (promotions.Count > 0)
             {
                 if (_appData.Courses.Count > 0)
                 {
@@ -50,8 +42,8 @@ namespace NationalEducation
 
                         foreach (string promotion in promotions)
                         {
-                            List<Student> students = PromotionOperator.GetAllStudentsOfPromotions(promotion);
-                            string average = PromotionOperator.GetAverageOfCourseOfPromotion(students, course);
+                            List<Student> students = PromotionOperator.GetStudentsInPromotion(promotion);
+                            string average = PromotionOperator.GetCourseAverageForPromotion(students, course);
 
                             temp += $" - {promotion} : {average}";
                         }
@@ -91,12 +83,12 @@ namespace NationalEducation
                     // Affichage de la liste des étudiants
                     StudentOperator.ListAllStudents();
                     // Selection d'un étudiant
-                    Student student = GenericOperator.Select<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_ADDGRADE);
+                    Student student = GenericOperator.SelectItemOfList<Student>(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_ADDGRADE);
 
                     // Affichage de la liste des cours
                     CourseOperator.ListAllCourses();
                     // Selection d'un cours
-                    Course course = GenericOperator.Select<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_ADDGRADE);
+                    Course course = GenericOperator.SelectItemOfList<Course>(_appData.Courses, ConstantValue.COURSE_SELECT_DESCRIPTION_ADDGRADE);
 
                     // Saisie de l'utilisateur
                     gradeValue = InputValidator.GetAndValidGradeInput("Entrez la note : ");

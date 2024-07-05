@@ -18,7 +18,7 @@ namespace NationalEducation.Operators
         }
 
         // Afficher la liste de tout les étudiants
-        public void ListAllStudents() => GenericOperator.ListAll(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+        public void ListAllStudents() => GenericOperator.DisplayItemsOfList(_appData.Students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
 
         // Créer un nouvel étudiant
         public void AddStudent()
@@ -52,7 +52,7 @@ namespace NationalEducation.Operators
                 // Affichage de la liste des étudiants
                 ListAllStudents();
                 // Selection d'un étudiant
-                Student student = GenericOperator.Select(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
+                Student student = GenericOperator.SelectItemOfList(_appData.Students, ConstantValue.STUDENT_SELECT_DESCRIPTION_DISPLAYSTUDENT);
 
                 List<Grade> gradesOfStudent = student.GetGradesOfStudent(_appData.Grades);
 

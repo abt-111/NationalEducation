@@ -139,7 +139,7 @@ namespace NationalEducation
             {
                 case "0":
                     Console.Clear();
-                    campusApp.ListAllCourses(campusApp.PromotionOperator.GetPromotions());
+                    campusApp.DisplayCoursesWithAveragesByPromotion();
                     AskForKeyPress();
                     break;
                 case "1":
@@ -190,17 +190,17 @@ namespace NationalEducation
             {
                 case "0":
                     Console.Clear();
-                    campusApp.PromotionOperator.ListAllPromotions(campusApp.PromotionOperator.GetPromotions());
+                    campusApp.PromotionOperator.DisplayPromotions(campusApp.PromotionOperator.GetPromotions());
                     AskForKeyPress();
                     break;
                 case "1":
                     Console.Clear();
-                    campusApp.PromotionOperator.ListAllStudentsOfPromotion();
+                    campusApp.PromotionOperator.DisplayStudentsInPromotion();
                     AskForKeyPress();
                     break;
                 case "2":
                     Console.Clear();
-                    campusApp.PromotionOperator.ListAllAverageOfCoursesOfPromotion();
+                    campusApp.PromotionOperator.DisplayCoursesAverageForPromotion();
                     AskForKeyPress();
                     break;
                 default:

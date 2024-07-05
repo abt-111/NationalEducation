@@ -1,9 +1,4 @@
 ﻿using NationalEducation.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NationalEducation.Operators
 {
@@ -16,24 +11,41 @@ namespace NationalEducation.Operators
             _appData = appData;
         }
 
-        // Récupérer la liste des promotions
-        public List<string> GetPromotions()
+        // Afficher la liste des étudiants d'une promotions
+        public void DisplayStudentsInPromotion()
         {
-            List<string> promotions = new List<string>();
+            List<Student> students = SelectPromotionAndGetItsStudents();
 
-            foreach (Student student in _appData.Students)
+            GenericOperator.DisplayItemsOfList(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
+        }
+
+        // Afficher la liste des moyennes par cours d'une promotion donnée
+        public void DisplayCoursesAverageForPromotion()
+        {
+            List<Student> students = SelectPromotionAndGetItsStudents();
+
+            foreach (Course course in _appData.Courses)
             {
-                if (!promotions.Contains(student.Promotion))
-                {
-                    promotions.Add(student.Promotion);
-                }
+                Console.WriteLine($"{course.Name} - {GetCourseAverageForPromotion(students, course)}");
             }
 
-            return promotions;
+            Console.WriteLine(ConstantValue.SEPARATION);
+        }
+
+        public List<Student> SelectPromotionAndGetItsStudents()
+        {
+            // Affichage des promotions avec leur index dans la liste des promotions
+            DisplayPromotions(GetPromotions());
+
+            // Sélection de la promotion voulue
+            string promotion = GenericOperator.SelectItemOfList(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
+
+            // Récupération de la liste des étudiants de la promotion
+            return GetStudentsInPromotion(promotion);
         }
 
         // Afficher la liste des promotions
-        public void ListAllPromotions(List<string> promotions)
+        public void DisplayPromotions(List<string> promotions)
         {
             if (promotions.Count > 0)
             {
@@ -55,64 +67,37 @@ namespace NationalEducation.Operators
             Console.WriteLine(ConstantValue.SEPARATION);
         }
 
+        // Récupérer la liste des promotions
+        public List<string> GetPromotions()
+        {
+            List<string> promotions = new List<string>();
+
+            promotions = _appData.Students
+                .Select(student => student.Promotion)
+                .Distinct() // pour éviter les doublons
+                .ToList();
+
+            return promotions;
+        }
+
         // Récupérer la liste des étudiants d'une promotions
-        public List<Student> GetAllStudentsOfPromotions(string promotion)
+        public List<Student> GetStudentsInPromotion(string promotion)
         {
-            return _appData.Students.FindAll(x => x.Promotion == promotion);
-        }
-
-        // Afficher la liste des étudiants d'une promotions
-        public void ListAllStudentsOfPromotion()
-        {
-            ListAllPromotions(GetPromotions());
-
-            string promotion = GenericOperator.Select(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
-
-            List<Student> students = GetAllStudentsOfPromotions(promotion);
-
-            GenericOperator.ListAll(students, ConstantValue.STUDENTS_LIST_DESCRIPTION, ConstantValue.NO_STUDENTS_LIST_DESCRIPTION);
-        }
-
-        // Afficher la liste des moyennes par cours d'une promotion donnée
-        public void ListAllAverageOfCoursesOfPromotion()
-        {
-            ListAllPromotions(GetPromotions());
-
-            string promotion = GenericOperator.Select(GetPromotions(), ConstantValue.PROMOTION_SELECT_DESCRIPTION);
-
-            List<Student> students = _appData.Students.FindAll(x => x.Promotion == promotion);
-
-            foreach (Course course in _appData.Courses)
-            {
-                Console.WriteLine($"{course.Name} - {GetAverageOfCourseOfPromotion(students, course)}");
-            }
-
-            Console.WriteLine(ConstantValue.SEPARATION);
+            return _appData.Students.FindAll(student => student.Promotion == promotion);
         }
 
         // Récupérer la moyenne d'un cours pour une promotion donnée
-        public string GetAverageOfCourseOfPromotion(List<Student> students, Course course)
+        public string GetCourseAverageForPromotion(List<Student> students, Course course)
         {
-            float sum = 0;
-            int counter = 0;
-            double moyenne = 0;
+            double moyenne = students
+                .SelectMany(student => student.GetGradesOfStudent(_appData.Grades))// SelectMany pour avoir une List<Grade> et pas une List<List<Grade>>
+                .Where(grade => grade.CourseId == course.Id)
+                .Select(grade => grade.Value)
+                .DefaultIfEmpty() // Fournir une valeur par défaut si la séquence est vide
+                .Average();
 
-            foreach (Student student in students)
+            if (moyenne != 0)
             {
-                foreach (Grade grade in student.GetGradesOfStudent(_appData.Grades))
-                {
-                    if (grade.CourseId == course.Id)
-                    {
-                        sum += grade.Value;
-                        counter++;
-                    }
-                }
-            }
-
-            if (counter != 0)
-            {
-                moyenne = Math.Round(sum / counter, 1);
-
                 return $"{moyenne}";
             }
             else

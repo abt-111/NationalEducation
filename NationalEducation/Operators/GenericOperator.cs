@@ -11,7 +11,7 @@ namespace NationalEducation.Operators
     internal static class GenericOperator
     {
         // Lister les éléments IListable
-        public static void ListAll<T>(List<T> ListOfT, string listDescription, string noListDescription) where T : IListable
+        public static void DisplayItemsOfList<T>(List<T> ListOfT, string listDescription, string noListDescription) where T : IListable
         {
             if (ListOfT.Count > 0)
             {
@@ -36,7 +36,7 @@ namespace NationalEducation.Operators
             Console.WriteLine(ConstantValue.SEPARATION);
         }
 
-        public static T Select<T>(List<T> ListOfT, string selectDescription)
+        public static T SelectItemOfList<T>(List<T> ListOfT, string selectDescription)
         {
             int index;
 
