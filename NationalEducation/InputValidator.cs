@@ -1,43 +1,40 @@
-﻿using System.Dynamic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace NationalEducation
 {
     internal static class InputValidator
     {
-        // Récupérer et valider l'index entré par l'utilisateur
+        // Méthode pour obtenir et valider l'index entré par l'utilisateur
         public static int GetAndValidIndex(string indicationForUser, int maxIndex)
         {
             bool isValid = false;
             int index = 0;
             string userInput;
 
-            // Tant que la saisie de l'utilisateur n'est pas valide
+            // Boucler tant que la saisie de l'utilisateur n'est pas valide
             while (!isValid)
             {
-                Console.Write(indicationForUser);
-                // Saisie Utilisateur
-                userInput = Console.ReadLine();
+                Console.Write(indicationForUser); // Afficher une indication pour l'utilisateur
+                userInput = Console.ReadLine(); // Saisie Utilisateur
 
-                // Verifier de la validité de la saisie
-                isValid = TryValidIndex(userInput, maxIndex, out index); // L'entrée utilisateur convertie est attribué à index
+                // Essayer de valider l'entrée de l'utilisateur et attribuer la valeur à index
+                isValid = TryValidIndex(userInput, maxIndex, out index);
 
-                // Si la saisie n'est pas valide
+                // Si la saisie n'est pas valide, afficher un message d'erreur
                 if (!isValid)
                 {
-                    // Afficher un message d'erreur
                     Console.WriteLine($"Vous devez entrer un entier compris entre 0 et {maxIndex - 1}.\n");
                 }
             }
 
-            return index;
+            return index; // Retourner l'index validé
         }
 
-        // Essayer de valider l'index entré par l'utilisateur
+        // Méthode pour essayer de valider l'index entré par l'utilisateur
         public static bool TryValidIndex(string userInput, int maxIndex, out int index)
         {
-            // Condition : userInput convertie en int et index compris entre 0 et maxIndex exclue
+            // Condition : l'entrée utilisateur est convertie en entier et vérifier qu'elle est dans les limites spécifiées
             // L'entrée utilisateur convertie est attribué à index si la première condition est vraie
             return Int32.TryParse(userInput, out index) && index >= 0 && index < maxIndex;
         }
@@ -52,9 +49,8 @@ namespace NationalEducation
             // Tant que la saisie de l'utilisateur n'est pas valide
             while (!isValid)
             {
-                Console.Write(indicationForUser);
-                // Saisie Utilisateur
-                userInput = Console.ReadLine();
+                Console.Write(indicationForUser); // Afficher une indication pour l'utilisateur
+                userInput = Console.ReadLine(); // Saisie Utilisateur
 
                 // Verifier de la validité de la saisie
                 isValid = TryValidGradeValue(userInput, out gradeValue);
